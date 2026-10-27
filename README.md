@@ -6,8 +6,8 @@
 
 # neu-nuxt
 
-A **skin system for Nuxt UI v4** in plain Vue 3, with **neumorphism** and **glassmorphism** presets
-and a full component showcase.
+A **skin system for Nuxt UI v4** in plain Vue 3, with **neumorphism**, **glassmorphism** and
+**neo-brutalism** presets and a full component showcase.
 
 ```
 neu-nuxt/
@@ -23,6 +23,7 @@ never changes. Built-ins:
 
 - **Neumorphism** — clay surfaces, dual shadows, inset inputs.
 - **Glassmorphism** — frosted translucent panels, hairline borders, aurora canvas.
+- **Neo Brutalism** — thick ink borders, hard offset shadows, flat colour blocks, dotted paper.
 
 ```ts
 // vite.config.ts

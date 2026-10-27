@@ -2,18 +2,21 @@ import { deepMerge } from './merge'
 import type { Skin } from './types/skin'
 import type { NeuTheme } from './types/theme'
 import glass from './skins/glass'
+import neoBrutalism from './skins/neo-brutalism'
 import neumorphism from './skins/neumorphism'
 
 /** All built-in skins, keyed by name. */
 export const skins = {
   neumorphism,
-  glass
+  glass,
+  'neo-brutalism': neoBrutalism
 } as const
 
 export type BuiltInSkinName = keyof typeof skins
 
 export { default as neumorphism } from './skins/neumorphism'
 export { default as glass } from './skins/glass'
+export { default as neoBrutalism } from './skins/neo-brutalism'
 
 /** Look up a built-in skin by name. */
 export function getSkin(name: string): Skin | undefined {

@@ -3,5 +3,6 @@ export { getSkin, listSkins, resolveSkin, resolveSkinTheme, skins } from './regi
 export { useSkin } from './useSkin'
 export { default as neumorphism, neuTheme } from './skins/neumorphism'
 export { default as glass, glassTheme } from './skins/glass'
+export { default as neoBrutalism, neoBrutalismTheme } from './skins/neo-brutalism'
 export type { Skin } from './types/skin'
 export type { NeuTheme } from './types/theme'

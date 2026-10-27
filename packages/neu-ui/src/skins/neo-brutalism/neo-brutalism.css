@@ -1,0 +1,543 @@
+/**
+ * Neo-brutalism skin for @neu-nuxt/ui.
+ *
+ * Usage:
+ *
+ *   @import "tailwindcss";
+ *   @import "@nuxt/ui";
+ *   @import "@neu-nuxt/ui/skins/neo-brutalism.css";
+ *
+ * Hard offset shadows, thick ink borders, flat blocks of colour and a
+ * dotted paper canvas. Like the other skins, the utilities are plain CSS
+ * (not `@layer utilities`) so they win over Tailwind utilities such as
+ * `shadow-lg` or `ring` that Nuxt UI applies through variants.
+ */
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens                                                      */
+/* ------------------------------------------------------------------ */
+
+/* Scoped so multiple skins can be loaded together and switched at runtime. */
+html[data-skin='neo-brutalism'],
+html[data-skin='neo-brutalism'].light {
+  /* Ink, paper and flat colour blocks */
+  --brutal-ink: #111111;
+  --brutal-paper: #fdf6e3;
+  --brutal-surface: #ffffff;
+  --brutal-surface-muted: #fff3c4;
+  --brutal-surface-elevated: #ffffff;
+  --brutal-surface-accented: #ffe066;
+  --brutal-grid: color-mix(in oklab, var(--brutal-ink) 14%, transparent);
+
+  /* Border + hard shadow */
+  --brutal-border-color: var(--brutal-ink);
+  --brutal-shadow-color: var(--brutal-ink);
+  --brutal-border-width: 3px;
+  --brutal-radius: 0px;
+
+  --brutal-shadow-xs: 2px 2px 0 0 var(--brutal-shadow-color);
+  --brutal-shadow-sm: 3px 3px 0 0 var(--brutal-shadow-color);
+  --brutal-shadow: 5px 5px 0 0 var(--brutal-shadow-color);
+  --brutal-shadow-lg: 8px 8px 0 0 var(--brutal-shadow-color);
+  --brutal-shadow-xl: 12px 12px 0 0 var(--brutal-shadow-color);
+
+  /* Accent blocks */
+  --brutal-accent-yellow: #ffd93d;
+  --brutal-accent-pink: #ff90e8;
+  --brutal-accent-cyan: #7df9ff;
+  --brutal-accent-lime: #b8ff5a;
+  --brutal-accent-orange: #ff9f1c;
+  --brutal-accent-purple: #b6a3ff;
+  --brutal-accent-red: #ff5c5c;
+
+  /* Readable text versions of the accents (used for text-primary etc.) */
+  --brutal-primary-ink: #6b4f00;
+  --brutal-secondary-ink: #8a1c6f;
+  --brutal-success-ink: #356b00;
+  --brutal-info-ink: #006b78;
+  --brutal-warning-ink: #8a4a00;
+  --brutal-error-ink: #a11d1d;
+
+  /* Nuxt UI semantic tokens */
+  --ui-radius: 0px;
+  --ui-bg: var(--brutal-surface);
+  --ui-bg-muted: var(--brutal-paper);
+  --ui-bg-elevated: var(--brutal-surface-elevated);
+  --ui-bg-accented: var(--brutal-surface-accented);
+  --ui-bg-inverted: var(--brutal-accent-pink);
+
+  --ui-border: var(--brutal-border-color);
+  --ui-border-muted: color-mix(in oklab, var(--brutal-border-color) 38%, transparent);
+  --ui-border-accented: var(--brutal-border-color);
+  --ui-border-inverted: var(--brutal-border-color);
+
+  --ui-text-dimmed: #52525b;
+  --ui-text-muted: #3f3f46;
+  --ui-text-toned: #27272a;
+  --ui-text: #111111;
+  --ui-text-highlighted: #000000;
+  --ui-text-inverted: #111111;
+
+  /* Solid buttons/badges get a black label on a bright block. */
+  --ui-primary: var(--brutal-accent-yellow);
+  --ui-secondary: var(--brutal-accent-pink);
+  --ui-success: var(--brutal-accent-lime);
+  --ui-info: var(--brutal-accent-cyan);
+  --ui-warning: var(--brutal-accent-orange);
+  --ui-error: var(--brutal-accent-red);
+}
+
+html[data-skin='neo-brutalism'].dark,
+.dark[data-skin='neo-brutalism'] {
+  --brutal-ink: #f5f5f0;
+  --brutal-paper: #121212;
+  --brutal-surface: #1e1e1e;
+  --brutal-surface-muted: #262626;
+  --brutal-surface-elevated: #2a2a2a;
+  --brutal-surface-accented: #333333;
+  --brutal-grid: color-mix(in oklab, var(--brutal-ink) 14%, transparent);
+
+  --brutal-border-color: var(--brutal-ink);
+  --brutal-shadow-color: var(--brutal-ink);
+
+  --brutal-primary-ink: #ffe066;
+  --brutal-secondary-ink: #ffb3ef;
+  --brutal-success-ink: #d4ff9a;
+  --brutal-info-ink: #a5f3ff;
+  --brutal-warning-ink: #ffc266;
+  --brutal-error-ink: #ff9b9b;
+
+  --ui-radius: 0px;
+  --ui-bg: var(--brutal-surface);
+  --ui-bg-muted: var(--brutal-paper);
+  --ui-bg-elevated: var(--brutal-surface-elevated);
+  --ui-bg-accented: var(--brutal-surface-accented);
+  --ui-bg-inverted: var(--brutal-accent-pink);
+
+  --ui-border: var(--brutal-border-color);
+  --ui-border-muted: color-mix(in oklab, var(--brutal-border-color) 32%, transparent);
+  --ui-border-accented: var(--brutal-border-color);
+  --ui-border-inverted: var(--brutal-border-color);
+
+  --ui-text-dimmed: #a1a1aa;
+  --ui-text-muted: #d4d4d8;
+  --ui-text-toned: #e4e4e7;
+  --ui-text: #f5f5f0;
+  --ui-text-highlighted: #ffffff;
+  --ui-text-inverted: #111111;
+
+  --ui-primary: var(--brutal-accent-yellow);
+  --ui-secondary: var(--brutal-accent-pink);
+  --ui-success: var(--brutal-accent-lime);
+  --ui-info: var(--brutal-accent-cyan);
+  --ui-warning: var(--brutal-accent-orange);
+  --ui-error: var(--brutal-accent-red);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  [data-skin='neo-brutalism'] body {
+    background-color: var(--brutal-paper);
+    color: var(--ui-text);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  [data-skin='neo-brutalism'] ::selection {
+    background-color: var(--brutal-accent-yellow);
+    color: #111111;
+  }
+
+  [data-skin='neo-brutalism'] * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--brutal-border-color) transparent;
+  }
+
+  [data-skin='neo-brutalism'] ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  [data-skin='neo-brutalism'] ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  [data-skin='neo-brutalism'] ::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 0;
+    background-clip: content-box;
+    background-color: var(--brutal-border-color);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Shared surfaces                                                    */
+/* ------------------------------------------------------------------ */
+
+/* Page panel / card. */
+.brutal-panel,
+[data-skin='neo-brutalism'] .surface-panel {
+  background: var(--brutal-surface);
+  border: var(--brutal-border-width) solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: var(--brutal-shadow);
+}
+
+/* Compact chip, key, avatar. */
+.brutal-card,
+[data-skin='neo-brutalism'] .surface-card {
+  background: var(--brutal-surface);
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: var(--brutal-shadow-sm);
+}
+
+/* Border + shadow shell that leaves the background to the variant utility
+   (solid badges, coloured tab indicators). */
+.brutal-badge,
+.brutal-tab-indicator {
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: var(--brutal-shadow-sm);
+}
+
+/* Solid panels keep their semantic fill instead of the default paper. */
+[data-skin='neo-brutalism'] .brutal-panel.bg-primary {
+  background-color: var(--ui-primary);
+}
+
+[data-skin='neo-brutalism'] .brutal-panel.bg-secondary {
+  background-color: var(--ui-secondary);
+}
+
+[data-skin='neo-brutalism'] .brutal-panel.bg-success {
+  background-color: var(--ui-success);
+}
+
+[data-skin='neo-brutalism'] .brutal-panel.bg-info {
+  background-color: var(--ui-info);
+}
+
+[data-skin='neo-brutalism'] .brutal-panel.bg-warning {
+  background-color: var(--ui-warning);
+}
+
+[data-skin='neo-brutalism'] .brutal-panel.bg-error {
+  background-color: var(--ui-error);
+}
+
+[data-skin='neo-brutalism'] .brutal-panel.bg-inverted {
+  background-color: var(--ui-bg-inverted);
+}
+
+/* Solid colour blocks always use black ink, even for nested muted text. */
+[data-skin='neo-brutalism'] :is(
+  .brutal-panel.bg-primary,
+  .brutal-panel.bg-secondary,
+  .brutal-panel.bg-success,
+  .brutal-panel.bg-info,
+  .brutal-panel.bg-warning,
+  .brutal-panel.bg-error,
+  .brutal-panel.bg-inverted
+) :is(.text-muted, .text-toned, .text-dimmed, .text-default, .text-highlighted):not(.brutal-badge):not(.brutal-button):not(.brutal-card):not(.brutal-deck):not(.brutal-field):not(.brutal-track):not(.brutal-well) {
+  color: #111111;
+}
+
+/* Modal, drawer, dropdown. */
+.brutal-deck,
+[data-skin='neo-brutalism'] .surface-deck {
+  background: var(--brutal-surface);
+  border: var(--brutal-border-width) solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: var(--brutal-shadow-xl);
+}
+
+/* Floating menu / small deck. */
+.brutal-deck-sm,
+[data-skin='neo-brutalism'] .surface-deck-sm {
+  background: var(--brutal-surface-elevated);
+  border: var(--brutal-border-width) solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: var(--brutal-shadow-lg);
+}
+
+.brutal-deck-edge {
+  border-inline-start-width: var(--brutal-border-width);
+  border-inline-end-width: var(--brutal-border-width);
+  border-block-start-width: var(--brutal-border-width);
+  border-block-end-width: var(--brutal-border-width);
+}
+
+/* Input / well. */
+.brutal-well,
+[data-skin='neo-brutalism'] .surface-well {
+  background: var(--brutal-surface-muted);
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: inset 3px 3px 0 0 color-mix(in oklab, var(--brutal-border-color) 14%, transparent);
+}
+
+.brutal-well-sm,
+[data-skin='neo-brutalism'] .surface-well-sm {
+  background: var(--brutal-surface-muted);
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: inset 2px 2px 0 0 color-mix(in oklab, var(--brutal-border-color) 14%, transparent);
+}
+
+/* Active / pressed channel. */
+.brutal-pressed,
+[data-skin='neo-brutalism'] .surface-pressed {
+  background: var(--brutal-surface-accented);
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: inset 3px 3px 0 0 color-mix(in oklab, var(--brutal-border-color) 22%, transparent);
+}
+
+/* Navigation item. */
+.brutal-nav,
+[data-skin='neo-brutalism'] .surface-nav {
+  border: 2px solid transparent;
+  border-radius: var(--brutal-radius);
+  box-shadow: none;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.brutal-nav:hover:not(:disabled):not([aria-disabled='true']):not(.is-active),
+[data-skin='neo-brutalism'] .surface-nav:hover:not(:disabled):not([aria-disabled='true']):not(.is-active) {
+  background: var(--brutal-surface);
+  border-color: var(--brutal-border-color);
+  box-shadow: var(--brutal-shadow-sm);
+  transform: translate(-1px, -1px);
+}
+
+.brutal-nav:active:not(:disabled):not([aria-disabled='true']),
+[data-skin='neo-brutalism'] .surface-nav:active:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: var(--brutal-shadow-xs);
+  transform: translate(1px, 1px);
+}
+
+.brutal-nav.is-active,
+.brutal-nav[data-active='true'],
+[data-skin='neo-brutalism'] .surface-nav.is-active,
+[data-skin='neo-brutalism'] .surface-nav[data-active='true'] {
+  background: var(--brutal-accent-yellow);
+  border-color: var(--brutal-border-color);
+  box-shadow: none;
+  color: #111111;
+  transform: none;
+}
+
+.brutal-nav:disabled,
+.brutal-nav[aria-disabled='true'] {
+  opacity: 0.55;
+}
+
+/* Sticky app header. */
+.brutal-header,
+[data-skin='neo-brutalism'] .surface-header {
+  background-color: var(--brutal-paper);
+  border-bottom: var(--brutal-border-width) solid var(--brutal-border-color);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+/* Overlay scrim. */
+.brutal-overlay,
+[data-skin='neo-brutalism'] .surface-overlay {
+  background-color: rgb(0 0 0 / 55%);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Page background: dotted paper. */
+.brutal-canvas,
+[data-skin='neo-brutalism'] .surface-canvas {
+  background-color: var(--brutal-paper);
+  background-image: radial-gradient(var(--brutal-grid) 1.2px, transparent 1.2px);
+  background-size: 18px 18px;
+  background-attachment: fixed;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Interactive surfaces                                               */
+/* ------------------------------------------------------------------ */
+
+.brutal-button {
+  border: var(--brutal-border-width) solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: var(--brutal-shadow-sm);
+  transition:
+    background-color 120ms ease,
+    box-shadow 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.brutal-button:hover:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: var(--brutal-shadow);
+  transform: translate(-2px, -2px);
+}
+
+.brutal-button:active:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: var(--brutal-shadow-xs);
+  transform: translate(2px, 2px);
+}
+
+.brutal-button:focus-visible {
+  outline: var(--brutal-border-width) solid var(--brutal-border-color);
+  outline-offset: 3px;
+}
+
+.brutal-button:disabled,
+.brutal-button[aria-disabled='true'] {
+  box-shadow: none;
+  opacity: 0.55;
+  transform: none;
+}
+
+/* Keep coloured text readable on light paper. */
+[data-skin='neo-brutalism'] .text-primary {
+  color: var(--brutal-primary-ink);
+}
+
+/* Active tabs use a data-state variant, which is more specific than `.text-primary`. */
+[data-skin='neo-brutalism'] .data-\[state\=active\]\:text-primary[data-state='active'] {
+  color: var(--brutal-primary-ink);
+}
+
+[data-skin='neo-brutalism'] .text-secondary {
+  color: var(--brutal-secondary-ink);
+}
+
+[data-skin='neo-brutalism'] .text-success {
+  color: var(--brutal-success-ink);
+}
+
+[data-skin='neo-brutalism'] .text-info {
+  color: var(--brutal-info-ink);
+}
+
+[data-skin='neo-brutalism'] .text-warning {
+  color: var(--brutal-warning-ink);
+}
+
+[data-skin='neo-brutalism'] .text-error {
+  color: var(--brutal-error-ink);
+}
+
+/* Progress indicator. */
+.brutal-progress {
+  background: currentColor;
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: var(--brutal-shadow-xs);
+}
+
+/* Switch thumb / slider thumb. */
+.brutal-thumb {
+  background: var(--brutal-accent-yellow);
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: var(--brutal-shadow-xs);
+}
+
+/* Clear surfaces (ghost, link, flat variants). */
+.brutal-clear {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.brutal-clear\! {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Decorative colour blocks. */
+.brutal-accent-yellow {
+  background-color: var(--brutal-accent-yellow);
+  color: #111111;
+}
+
+.brutal-accent-pink {
+  background-color: var(--brutal-accent-pink);
+  color: #111111;
+}
+
+.brutal-accent-cyan {
+  background-color: var(--brutal-accent-cyan);
+  color: #111111;
+}
+
+.brutal-accent-lime {
+  background-color: var(--brutal-accent-lime);
+  color: #111111;
+}
+
+.brutal-accent-orange {
+  background-color: var(--brutal-accent-orange);
+  color: #111111;
+}
+
+.brutal-accent-purple {
+  background-color: var(--brutal-accent-purple);
+  color: #111111;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Form controls                                                      */
+/* ------------------------------------------------------------------ */
+
+.brutal-field {
+  background: var(--brutal-surface);
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: inset 3px 3px 0 0 color-mix(in oklab, var(--brutal-border-color) 14%, transparent);
+  transition:
+    box-shadow 120ms ease,
+    border-color 120ms ease,
+    outline-color 120ms ease;
+}
+
+.brutal-field:focus,
+.brutal-field:focus-within {
+  border-color: var(--brutal-border-color);
+  box-shadow:
+    var(--brutal-shadow-sm),
+    inset 0 0 0 1px var(--brutal-border-color);
+  outline: none;
+}
+
+/* Checkbox / radio / rating squares. */
+.brutal-check {
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: inset 2px 2px 0 0 color-mix(in oklab, var(--brutal-border-color) 16%, transparent);
+  transition: box-shadow 120ms ease, background-color 120ms ease;
+}
+
+.brutal-check[data-state='checked'],
+.brutal-check[aria-checked='true'] {
+  background: var(--brutal-accent-yellow);
+  color: #111111;
+  box-shadow: var(--brutal-shadow-xs);
+}
+
+/* Switch track. */
+.brutal-track {
+  background: var(--brutal-surface-muted);
+  border: 2px solid var(--brutal-border-color);
+  border-radius: var(--brutal-radius);
+  box-shadow: inset 2px 2px 0 0 color-mix(in oklab, var(--brutal-border-color) 16%, transparent);
+}

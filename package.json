@@ -1,7 +1,7 @@
 {
   "name": "neu-nuxt",
   "version": "0.2.0",
-  "description": "Neumorphic theme and component library for Nuxt UI (Vue 3) + showcase",
+  "description": "Skin system with neumorphism, glassmorphism and neo-brutalism presets for Nuxt UI (Vue 3) + showcase",
   "scripts": {
     "dev": "npm run dev --workspace playground",
     "build": "npm run build --workspace @neu-nuxt/ui && npm run build --workspace playground",
@@ -13,6 +13,8 @@
     "nuxt-ui",
     "vue",
     "neumorphism",
+    "glassmorphism",
+    "neo-brutalism",
     "soft-ui",
     "design-system",
     "component-library"

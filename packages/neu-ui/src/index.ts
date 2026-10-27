@@ -5,10 +5,12 @@ export {
   resolveSkinTheme,
   skins,
   neumorphism,
-  glass
+  glass,
+  neoBrutalism
 } from './registry'
 export { neuTheme } from './skins/neumorphism'
 export { glassTheme } from './skins/glass'
+export { neoBrutalismTheme } from './skins/neo-brutalism'
 export { toComponentUi } from './utils/adapt'
 export { applySkin, applyNeuTheme } from './runtime'
 export { componentUiFor, skinComponentUi } from './runtime-ui'

@@ -42,6 +42,13 @@ const installs = {
     description: 'Translucent frosted panels, hairline borders and soft depth on an aurora canvas.',
     css: '@import "@neu-nuxt/ui/skins/glass.css";',
     var: '--glass-surface: #ffffff8c;'
+  },
+  'neo-brutalism': {
+    name: 'Neo Brutalism',
+    icon: 'i-lucide-zap',
+    description: 'Thick ink borders, hard offset shadows and flat blocks of saturated colour on dotted paper.',
+    css: '@import "@neu-nuxt/ui/skins/neo-brutalism.css";',
+    var: '--brutal-accent-yellow: #ffd93d;'
   }
 } as const
 
@@ -73,7 +80,7 @@ const usage = [
     />
 
     <div class="space-y-10">
-      <Demo title="Skins" description="Both skins ship in this package. Switch at runtime — no reload.">
+      <Demo title="Skins" description="Three skins ship in this package. Switch at runtime — no reload.">
         <div class="grid gap-4 sm:grid-cols-2">
           <div
             v-for="option in skinOptions"
@@ -83,7 +90,7 @@ const usage = [
           >
             <div class="flex items-start gap-3">
               <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-default surface-card">
-                <UIcon :name="installs[option.value as 'glass' | 'neumorphism'].icon" class="size-5 text-primary" />
+                <UIcon :name="installs[option.value as keyof typeof installs].icon" class="size-5 text-primary" />
               </div>
               <div class="min-w-0 flex-1">
                 <div class="flex items-center gap-2">
@@ -91,10 +98,10 @@ const usage = [
                   <UBadge v-if="skin === option.value" label="active" color="success" variant="soft" size="sm" />
                 </div>
                 <p class="mt-1 text-xs leading-relaxed text-muted">
-                  {{ installs[option.value as 'glass' | 'neumorphism'].description }}
+                  {{ installs[option.value as keyof typeof installs].description }}
                 </p>
                 <code class="mt-2 block truncate text-[10px] text-dimmed">
-                  {{ installs[option.value as 'glass' | 'neumorphism'].css }}
+                  {{ installs[option.value as keyof typeof installs].css }}
                 </code>
               </div>
             </div>
@@ -135,6 +142,7 @@ const usage = [
 
         <pre class="mt-5 overflow-x-auto rounded-2xl bg-default p-4 text-xs leading-relaxed text-toned surface-well"><code>// neumorphism maps .surface-panel to a dual-shadow clay panel
 // glass maps the same class to a translucent, blurred deck
+// neo-brutalism maps it to a thick ink border with a hard offset shadow
 &lt;div class="surface-panel rounded-2xl"&gt;…&lt;/div&gt;</code></pre>
       </Demo>
 
@@ -142,7 +150,7 @@ const usage = [
         title="Design tokens"
         description="Surfaces, borders, blur and shadows are CSS variables. Dark mode is a variable swap."
       >
-        <div class="grid gap-4 lg:grid-cols-2">
+        <div class="grid gap-4 lg:grid-cols-3">
           <div class="rounded-2xl bg-default p-4 surface-well">
             <p class="text-xs font-semibold uppercase tracking-widest text-dimmed">Neumorphism · light</p>
             <pre class="mt-2 text-xs leading-relaxed text-toned"><code>--neu-bg: #e4eaf2;
@@ -157,6 +165,13 @@ const usage = [
 --glass-border: #ffffff61;
 --glass-shadow: #0f172a1f;</code></pre>
           </div>
+          <div class="rounded-2xl bg-default p-4 surface-well">
+            <p class="text-xs font-semibold uppercase tracking-widest text-dimmed">Neo Brutalism · light</p>
+            <pre class="mt-2 text-xs leading-relaxed text-toned"><code>--brutal-accent-yellow: #ffd93d;
+--brutal-border-width: 3px;
+--brutal-shadow: 5px 5px 0 0 #111;
+--ui-radius: 0px;</code></pre>
+          </div>
         </div>
 
         <p class="mt-4 text-sm text-muted">
@@ -167,10 +182,11 @@ const usage = [
 @import "@nuxt/ui";
 @import "@neu-nuxt/ui/skins/neumorphism.css";
 @import "@neu-nuxt/ui/skins/glass.css";
+@import "@neu-nuxt/ui/skins/neo-brutalism.css";
 
-[data-skin='glass'] {
-  --glass-blur: 24px;
-  --ui-primary: #7c3aed;
+[data-skin='neo-brutalism'] {
+  --brutal-border-width: 4px;
+  --ui-primary: #ffd93d;
 }</code></pre>
       </Demo>
 

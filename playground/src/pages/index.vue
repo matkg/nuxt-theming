@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useSkinState } from '../composables/skin'
 import { catalogCount } from '../data/catalog.generated'
 
@@ -8,9 +8,20 @@ const { skin, setSkin } = useSkinState()
 const email = ref('')
 const remember = ref(true)
 
+const skinOrder = [
+  { skin: 'neumorphism', label: 'Try neumorphism', icon: 'i-lucide-circle-dot' },
+  { skin: 'glass', label: 'Try glassmorphism', icon: 'i-lucide-scan-line' },
+  { skin: 'neo-brutalism', label: 'Try neo brutalism', icon: 'i-lucide-zap' }
+]
+
+const nextSkin = computed(() => {
+  const index = skinOrder.findIndex(item => item.skin === skin.value)
+  return skinOrder[(index + 1) % skinOrder.length]!
+})
+
 const features = [
   { icon: 'i-lucide-shapes', title: 'Every component', description: `All ${catalogCount} public Nuxt UI components re-exported with a Neu prefix. The active skin styles them.` },
-  { icon: 'i-lucide-sun-moon', title: 'Light & dark', description: 'Both skins ship light and dark tokens, so switching modes never breaks the surface language.' },
+  { icon: 'i-lucide-sun-moon', title: 'Light & dark', description: 'Every skin ships light and dark tokens, so switching modes never breaks the surface language.' },
   { icon: 'i-lucide-palette', title: 'Token driven', description: 'Surfaces, borders, blur and shadows live in CSS variables. Re-skin everything from one stylesheet.' },
   { icon: 'i-lucide-accessibility', title: 'Accessible by default', description: 'Built on Reka UI primitives: keyboard support, focus rings and ARIA semantics stay intact.' },
   { icon: 'i-lucide-feather', title: 'No runtime cost', description: 'Skins are class names, not wrapper components. No render overhead and no extra props.' },
@@ -58,15 +69,15 @@ function notify() {
   <div class="space-y-16">
     <section class="grid items-center gap-12 pt-4 lg:grid-cols-[1.05fr_0.95fr] lg:pt-10">
       <div>
-        <UBadge label="Nuxt UI v4 · Vue 3 · 2 skins" color="primary" variant="soft" size="md" icon="i-lucide-sparkles" />
+        <UBadge label="Nuxt UI v4 · Vue 3 · 3 skins" color="primary" variant="soft" size="md" icon="i-lucide-sparkles" />
         <h1 class="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight text-highlighted sm:text-5xl xl:text-6xl">
           Nuxt UI,<br>
           <span class="text-primary">re-skinned.</span>
         </h1>
         <p class="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
           A skin system for Nuxt UI. Every component — from buttons to data tables — is re-exported
-          once and re-skinned with design tokens: neumorphism by default, glassmorphism on demand,
-          and room for your own presets.
+          once and re-skinned with design tokens: neumorphism by default, glassmorphism and
+          neo-brutalism on demand, and room for your own presets.
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
@@ -80,10 +91,10 @@ function notify() {
             size="lg"
             color="neutral"
             variant="ghost"
-            :icon="skin === 'glass' ? 'i-lucide-circle-dot' : 'i-lucide-scan-line'"
-            @click="setSkin(skin === 'glass' ? 'neumorphism' : 'glass')"
+            :icon="nextSkin.icon"
+            @click="setSkin(nextSkin.skin)"
           >
-            {{ skin === 'glass' ? 'Try neumorphism' : 'Try glassmorphism' }}
+            {{ nextSkin.label }}
           </UButton>
         </div>
 
@@ -98,7 +109,7 @@ function notify() {
           </div>
           <div class="rounded-2xl bg-default surface-card px-4 py-3">
             <dt class="text-[11px] font-semibold uppercase tracking-widest text-dimmed">Skins</dt>
-            <dd class="mt-1 text-2xl font-semibold text-highlighted">2+</dd>
+            <dd class="mt-1 text-2xl font-semibold text-highlighted">3</dd>
           </div>
         </dl>
       </div>
@@ -152,7 +163,7 @@ function notify() {
     <section>
       <div class="mb-6 flex items-end justify-between gap-4">
         <div>
-          <h2 class="text-2xl font-semibold tracking-tight text-highlighted">One library, two surface languages</h2>
+          <h2 class="text-2xl font-semibold tracking-tight text-highlighted">One library, three surface languages</h2>
           <p class="mt-1 text-sm text-muted">Swap the skin and every component changes character — the API stays identical.</p>
         </div>
       </div>

@@ -6,17 +6,18 @@
 
 # @neu-nuxt/ui
 
-A **skin system for [Nuxt UI](https://ui.nuxt.com) v4** in plain Vue 3, with two production-ready
+A **skin system for [Nuxt UI](https://ui.nuxt.com) v4** in plain Vue 3, with three production-ready
 presets:
 
 - **Neumorphism** — dual shadows, one light source, pressed-in inputs, clay surfaces.
 - **Glassmorphism** — translucent frosted panels, hairline borders, aurora canvas.
+- **Neo Brutalism** — thick ink borders, hard offset shadows, flat colour blocks, dotted paper.
 
 Every public Nuxt UI component is re-exported with a `Neu` prefix and re-skinned from CSS tokens.
 The component API never changes — only the surface language does.
 
 - 🧱 **126 component exports** — nothing left unstyled
-- 🎨 **2 built-in skins** — neumorphism + glassmorphism, light & dark
+- 🎨 **3 built-in skins** — neumorphism, glassmorphism + neo-brutalism, light & dark
 - 🔁 **Runtime switching** — no rebuild, no reload
 - 🧩 **Custom skins** — a skin is `{ name, label, theme, css }`
 - ⚡ **Zero wrapper overhead** — skins are class names and CSS variables
@@ -43,7 +44,7 @@ import vue from '@vitejs/plugin-vue'
 import { skin } from '@neu-nuxt/ui/vite'
 
 export default defineConfig({
-  plugins: [vue(), skin('glass')] // or skin('neumorphism') / neuUI()
+  plugins: [vue(), skin('glass')] // or skin('neumorphism') / skin('neo-brutalism') / neuUI()
 })
 ```
 
@@ -75,8 +76,9 @@ Import Tailwind, Nuxt UI and the skin stylesheet(s):
 /* pick one… */
 @import "@neu-nuxt/ui/skins/neumorphism.css";
 
-/* …or load both and switch at runtime */
+/* …or load several and switch at runtime */
 @import "@neu-nuxt/ui/skins/glass.css";
+@import "@neu-nuxt/ui/skins/neo-brutalism.css";
 ```
 
 `@neu-nuxt/ui/theme.css` is kept as an alias for the neumorphism stylesheet.
@@ -141,9 +143,11 @@ app.use(NeuUI, { skin: 'glass', colors: { primary: 'sky' } })
 | --- | --- | --- | --- |
 | `neumorphism` | `@neu-nuxt/ui/skins/neumorphism.css` | `--neu-*` | clay surfaces, dual shadows |
 | `glass` | `@neu-nuxt/ui/skins/glass.css` | `--glass-*` | frosted panels, aurora canvas |
+| `neo-brutalism` | `@neu-nuxt/ui/skins/neo-brutalism.css` | `--brutal-*` | ink borders, hard shadows, flat colour |
 
-Both skins define light and dark tokens. Glass CSS is scoped to `[data-skin='glass']` so both
-stylesheets can be loaded together; neumorphism is the default (no attribute needed).
+All skins define light and dark tokens. Glass and neo-brutalism CSS are scoped to
+`[data-skin='glass']` / `[data-skin='neo-brutalism']` so every stylesheet can be loaded together;
+neumorphism is the default (no attribute needed).
 
 ### Runtime switching
 
@@ -191,18 +195,18 @@ A skin is a plain object:
 ```ts
 import type { Skin } from '@neu-nuxt/ui'
 
-export const brutalism: Skin = {
-  name: 'brutalism',
-  label: 'Neobrutalism',
+export const collage: Skin = {
+  name: 'collage',
+  label: 'Collage',
   theme: {
-    colors: { primary: 'yellow', neutral: 'zinc' },
+    colors: { primary: 'orange', neutral: 'stone' },
     button: { slots: { base: 'border-2 border-black shadow-[4px_4px_0_0_#000] rounded-none' } }
   }
 }
 ```
 
-Pass it to `skin(brutalism)` or `<NeuProvider :skin="brutalism">`. Add a stylesheet with the
-same `[data-skin='brutalism']` scoping pattern if your skin needs tokens or surface classes.
+Pass it to `skin(collage)` or `<NeuProvider :skin="collage">`. Add a stylesheet with the
+same `[data-skin='collage']` scoping pattern if your skin needs tokens or surface classes.
 
 ### Design tokens
 
@@ -224,6 +228,16 @@ Glassmorphism (light):
 --glass-canvas: #e9eefb;
 ```
 
+Neo Brutalism (light):
+
+```css
+--brutal-accent-yellow: #ffd93d;
+--brutal-border-width: 3px;
+--brutal-shadow: 5px 5px 0 0 #111;
+--brutal-paper: #fdf6e3;
+--ui-radius: 0px;
+```
+
 Override any variable after importing the skin:
 
 ```css
@@ -243,10 +257,10 @@ Override any variable after importing the skin:
   ```
 
 - `skins`, `getSkin`, `listSkins`, `resolveSkin`, `resolveSkinTheme` — registry helpers
-- `neumorphism`, `glass` — built-in skin objects
+- `neumorphism`, `glass`, `neoBrutalism` — built-in skin objects
 - `applySkin`, `applyNeuTheme` (deprecated alias) — runtime application
 - `useSkin` — persisted reactive skin switching
-- `neuTheme`, `glassTheme` — raw component themes
+- `neuTheme`, `glassTheme`, `neoBrutalismTheme` — raw component themes
 - `toComponentUi`, `skinComponentUi`, `componentUiFor` — flattened `ui` prop maps
 - `NeuProvider`, `NeuUI` (also the default export) — Vue plugin / provider
 
@@ -258,6 +272,9 @@ Override any variable after importing the skin:
   works without a dev-server restart. If you don't use the plugin, add
   `@source "../node_modules/@neu-nuxt/ui/src/skins";` to your CSS entry.
 - Glass surfaces rely on `backdrop-filter`; test on low-end devices and keep text contrast in mind.
+- Neo-brutalism uses hard offset shadows and 3px borders by default; override `--brutal-border-width`,
+  `--brutal-shadow-*` and `--brutal-radius` to tune the intensity. The skin swaps black ink for
+  warm white in dark mode so borders and hard shadows stay visible.
 - The look is strongest on a uniform (or softly colored) background — avoid busy imagery behind cards.
 
 ## License

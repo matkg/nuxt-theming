@@ -10,7 +10,7 @@ const year = new Date().getFullYear()
           <span class="size-2.5 rounded-full bg-primary" />
         </span>
         <p class="text-sm text-muted">
-          <span class="font-semibold text-highlighted">neu/ui</span> — a neumorphic skin for Nuxt UI.
+          <span class="font-semibold text-highlighted">neu/ui</span> — a skin system for Nuxt UI.
         </p>
       </div>
 

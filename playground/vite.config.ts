@@ -19,6 +19,7 @@ export default defineConfig({
     // Use the library sources directly so the showcase does not need a build step.
     alias: [
       { find: '@neu-nuxt/ui/skins/glass.css', replacement: library('src/skins/glass/glass.css') },
+      { find: '@neu-nuxt/ui/skins/neo-brutalism.css', replacement: library('src/skins/neo-brutalism/neo-brutalism.css') },
       { find: '@neu-nuxt/ui/skins/neumorphism.css', replacement: library('src/skins/neumorphism/neumorphism.css') },
       { find: '@neu-nuxt/ui/theme.css', replacement: library('src/skins/neumorphism/neumorphism.css') },
       { find: '@neu-nuxt/ui/vite', replacement: library('src/vite.ts') },

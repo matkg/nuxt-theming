@@ -125,28 +125,28 @@
 
 /* Extruded, static (cards, panels, alert boxes…) */
 .neu-raised-sm,
-:root:not([data-skin='glass']) .surface-card {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-card {
   box-shadow:
     3px 3px 7px var(--neu-shadow-dark),
     -3px -3px 7px var(--neu-shadow-light);
 }
 
 .neu-raised,
-:root:not([data-skin='glass']) .surface-panel {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-panel {
   box-shadow:
     6px 6px 14px var(--neu-shadow-dark),
     -6px -6px 14px var(--neu-shadow-light);
 }
 
 .neu-raised-lg,
-:root:not([data-skin='glass']) .surface-deck-sm {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-deck-sm {
   box-shadow:
     10px 10px 22px var(--neu-shadow-dark),
     -10px -10px 22px var(--neu-shadow-light);
 }
 
 .neu-raised-xl,
-:root:not([data-skin='glass']) .surface-deck {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-deck {
   box-shadow:
     16px 16px 36px var(--neu-shadow-dark),
     -16px -16px 36px var(--neu-shadow-light);
@@ -154,21 +154,21 @@
 
 /* Sunken / inset (inputs, tracks, wells…) */
 .neu-inset-sm,
-:root:not([data-skin='glass']) .surface-well-sm {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-well-sm {
   box-shadow:
     inset 3px 3px 8px var(--neu-inset-dark),
     inset -2px -2px 5px var(--neu-inset-light);
 }
 
 .neu-inset,
-:root:not([data-skin='glass']) .surface-well {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-well {
   box-shadow:
     inset 5px 5px 14px var(--neu-inset-dark),
     inset -4px -4px 9px var(--neu-inset-light);
 }
 
 .neu-pressed,
-:root:not([data-skin='glass']) .surface-pressed {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-pressed {
   box-shadow:
     inset 4px 4px 11px var(--neu-inset-dark),
     inset -2px -2px 5px var(--neu-inset-light);
@@ -217,13 +217,13 @@
 
 /* Small interactive chip / nav item: flat until hovered, inset when active */
 .neu-nav,
-:root:not([data-skin='glass']) .surface-nav {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-nav {
   box-shadow: none;
   transition: box-shadow 200ms ease, color 200ms ease, background-color 200ms ease;
 }
 
 .neu-nav:hover:not(.is-active),
-:root:not([data-skin='glass']) .surface-nav:hover:not(.is-active) {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-nav:hover:not(.is-active) {
   box-shadow:
     2px 2px 5px var(--neu-shadow-dark),
     -2px -2px 5px var(--neu-shadow-light);
@@ -231,14 +231,14 @@
 
 .neu-nav.is-active,
 .neu-nav[data-active='true'],
-:root:not([data-skin='glass']) .surface-nav.is-active,
-:root:not([data-skin='glass']) .surface-nav[data-active='true'] {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-nav.is-active,
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-nav[data-active='true'] {
   box-shadow: inset 3px 3px 7px var(--neu-shadow-dark), inset -2px -2px 5px var(--neu-shadow-light);
 }
 
 /* Sticky app header: a soft shadow instead of a hard border */
 .neu-header,
-:root:not([data-skin='glass']) .surface-header {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-header {
   box-shadow:
     0 10px 24px -18px var(--neu-shadow-dark),
     0 1px 0 0 var(--neu-outline);
@@ -292,7 +292,7 @@
 
 /* Overlay scrim */
 .neu-overlay,
-:root:not([data-skin='glass']) .surface-overlay {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-overlay {
   background-color: color-mix(in oklab, var(--neu-bg) 72%, transparent);
   backdrop-filter: blur(6px) saturate(120%);
 }
@@ -302,7 +302,7 @@
 /* ------------------------------------------------------------------ */
 
 .neu-canvas,
-:root:not([data-skin='glass']) .surface-canvas {
+:root:not([data-skin='glass']):not([data-skin='neo-brutalism']) .surface-canvas {
   background-color: var(--neu-bg);
   background-image:
     radial-gradient(60rem 40rem at 10% -10%, color-mix(in oklab, var(--neu-shadow-light) 70%, transparent), transparent 60%),
