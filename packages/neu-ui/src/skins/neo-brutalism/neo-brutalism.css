@@ -195,6 +195,22 @@ html[data-skin='neo-brutalism'].dark,
   box-shadow: var(--brutal-shadow-sm);
 }
 
+/* Checked checkbox / radio cards get a solid colour block. */
+[data-skin='neo-brutalism'] .brutal-card:has([data-slot='base'][data-state='checked']) {
+  background: var(--brutal-accent-yellow);
+  border-color: var(--brutal-border-color);
+}
+
+[data-skin='neo-brutalism'] .brutal-card:has([data-slot='base'][data-state='checked']) :is(
+  .text-muted,
+  .text-toned,
+  .text-dimmed,
+  .text-default,
+  .text-highlighted
+) {
+  color: #111111;
+}
+
 /* Border + shadow shell that leaves the background to the variant utility
    (solid badges, coloured tab indicators). */
 .brutal-badge,

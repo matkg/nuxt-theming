@@ -6,6 +6,7 @@ import PageHeader from '../../components/PageHeader.vue'
 const single = ref(true)
 const terms = ref(false)
 const selected = ref(['vue'])
+const cardSelection = ref<Record<string, boolean>>({ vue: true, nuxt: false, vite: false })
 const plan = ref('pro')
 
 const options = [
@@ -55,11 +56,10 @@ const plans = [
           <UCheckbox
             v-for="option in options"
             :key="option.value"
-            :value="option.value"
+            v-model="cardSelection[option.value]"
             :label="option.label"
             :icon="option.icon"
             variant="card"
-            :model-value="selected"
           />
         </div>
       </Demo>
