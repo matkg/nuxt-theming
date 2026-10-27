@@ -51,7 +51,7 @@ const contextItems = [
 
       <Demo title="Context menu" description="Right-click the card.">
         <UContextMenu :items="contextItems">
-          <div class="grid h-40 cursor-context-menu place-items-center rounded-2xl bg-default text-sm text-muted neu-inset-sm">
+          <div class="grid h-40 cursor-context-menu place-items-center rounded-2xl bg-default text-sm text-muted surface-well-sm">
             <div class="text-center">
               <UIcon name="i-lucide-mouse-pointer-2" class="mx-auto size-6 text-dimmed" />
               <p class="mt-2">Right-click anywhere on this surface</p>

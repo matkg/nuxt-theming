@@ -75,7 +75,7 @@ const steps = [
       </Demo>
 
       <Demo title="Stepper in a card">
-        <div class="rounded-2xl bg-default p-5 neu-inset-sm">
+        <div class="rounded-2xl bg-default p-5 surface-well-sm">
           <UStepper v-model="step" :items="steps" class="w-full" />
           <USeparator class="my-5" />
           <div class="flex items-center justify-between">

@@ -1,12 +1,11 @@
-import type { NeuTheme } from './types'
+import type { NeuTheme } from '../types/theme'
 
 /**
  * Flatten an app-config shaped theme (`{ button: { slots: { base } } }`)
- * into the shape used by the `ui` prop and `<UTheme>`
- * (`{ button: { base } }`).
+ * into the shape used by the `ui` prop and `<UTheme>` (`{ button: { base } }`).
  *
  * Variants cannot be expressed through the `ui` prop, so they are dropped:
- * use the Vite plugin or `<NeuProvider>` for the complete theme.
+ * use the Vite plugin or `<NeuProvider>` for the full theme.
  */
 export function toComponentUi(theme: NeuTheme): Record<string, Record<string, unknown>> {
   const result: Record<string, Record<string, unknown>> = {}

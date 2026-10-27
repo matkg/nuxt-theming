@@ -46,7 +46,7 @@ async function promise() {
   await new Promise(resolve => setTimeout(resolve, 1600))
   toast.add({
     title: 'Theme published',
-    description: 'All 122 components are up to date.',
+    description: 'All 126 components are up to date.',
     icon: 'i-lucide-sparkles',
     color: 'success'
   })
@@ -85,7 +85,7 @@ function warning() {
       </Demo>
 
       <Demo title="Anatomy" description="Each toast is a raised card with an icon, title, description and optional actions.">
-        <div class="mx-auto max-w-md rounded-2xl bg-default p-4 neu-raised-xl">
+        <div class="mx-auto max-w-md rounded-2xl bg-default p-4 surface-deck">
           <div class="flex gap-2.5">
             <UIcon name="i-lucide-circle-check" class="mt-0.5 size-5 shrink-0 text-success" />
             <div class="min-w-0 flex-1">

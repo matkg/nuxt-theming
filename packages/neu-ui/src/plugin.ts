@@ -1,10 +1,13 @@
 import type { App, Component, Plugin } from 'vue'
-import * as components from './components'
-import { applyNeuTheme } from './runtime'
-import type { NeuTheme } from './theme/types'
+import * as components from './components.generated'
+import { applySkin } from './runtime'
+import type { NeuTheme } from './types/theme'
+import type { Skin } from './types/skin'
 
 export interface NeuUIPluginOptions {
-  /** Partial theme merged on top of the neumorphic defaults. */
+  /** Skin to apply by default. */
+  skin?: string | Skin
+  /** Partial theme merged on top of the skin defaults. */
   theme?: NeuTheme
   /** Shorthand for `theme.colors`. */
   colors?: Record<string, string>
@@ -25,7 +28,7 @@ export interface NeuUIPluginOptions {
  * import NeuUI from '@neu-nuxt/ui'
  *
  * app.use(ui)
- * app.use(NeuUI, { colors: { primary: 'teal' } })
+ * app.use(NeuUI, { skin: 'glass', colors: { primary: 'sky' } })
  * ```
  */
 const NeuUI: Plugin<[NeuUIPluginOptions?]> = {
@@ -39,7 +42,7 @@ const NeuUI: Plugin<[NeuUIPluginOptions?]> = {
       }
     }
 
-    applyNeuTheme(Object.keys(theme).length ? theme : undefined)
+    applySkin(options.skin, Object.keys(theme).length ? theme : undefined)
 
     if (options.registerComponents === false) return
 

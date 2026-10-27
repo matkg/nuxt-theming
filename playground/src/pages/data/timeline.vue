@@ -6,7 +6,7 @@ const items = [
   {
     date: '2 minutes ago',
     title: 'Theme published',
-    description: '122 component overrides shipped to the registry.',
+    description: '126 component overrides shipped to the registry.',
     icon: 'i-lucide-rocket',
     color: 'success' as const
   },
@@ -56,7 +56,7 @@ const items = [
       </Demo>
 
       <Demo title="In a card">
-        <div class="rounded-2xl bg-default p-5 neu-inset-sm">
+        <div class="rounded-2xl bg-default p-5 surface-well-sm">
           <div class="mb-4 flex items-center justify-between">
             <div>
               <p class="text-sm font-semibold text-highlighted">Activity log</p>

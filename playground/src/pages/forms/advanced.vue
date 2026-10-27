@@ -22,13 +22,13 @@ const files = ref<File[]>([])
     <div class="space-y-10">
       <Demo title="Calendar">
         <div class="grid gap-6 lg:grid-cols-[auto_1fr]">
-          <UCalendar v-model="date" class="rounded-2xl bg-default p-3 neu-inset-sm" />
+          <UCalendar v-model="date" class="rounded-2xl bg-default p-3 surface-well-sm" />
           <div class="space-y-4">
             <p class="text-sm text-muted">
               The calendar is a raised panel with inset day cells. Selected days switch to the
               primary fill while keeping their shadow.
             </p>
-            <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+            <div class="rounded-2xl bg-default p-4 surface-well-sm">
               <p class="text-xs font-semibold uppercase tracking-widest text-dimmed">Selected</p>
               <p class="mt-1 font-mono text-sm text-highlighted">{{ date.toString() }}</p>
             </div>
@@ -65,7 +65,7 @@ const files = ref<File[]>([])
           <UColorPicker v-model="color" />
           <div class="space-y-2">
             <p class="text-xs font-semibold uppercase tracking-widest text-dimmed">Value</p>
-            <div class="flex items-center gap-2 rounded-xl bg-default px-3 py-2 neu-inset-sm">
+            <div class="flex items-center gap-2 rounded-xl bg-default px-3 py-2 surface-well-sm">
               <span class="size-4 rounded-md ring-1 ring-black/10" :style="{ backgroundColor: color }" />
               <code class="font-mono text-sm text-highlighted">{{ color }}</code>
             </div>

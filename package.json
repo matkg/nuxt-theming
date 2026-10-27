@@ -1,6 +1,6 @@
 {
   "name": "neu-nuxt",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Neumorphic theme and component library for Nuxt UI (Vue 3) + showcase",
   "scripts": {
     "dev": "npm run dev --workspace playground",
@@ -23,8 +23,8 @@
     "packages/*",
     "playground"
   ],
-  "devDependencies": {},
   "engines": {
     "node": ">=20"
-  }
+  },
+  "devDependencies": {}
 }

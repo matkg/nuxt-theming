@@ -6,10 +6,12 @@ import AppHeader from './components/AppHeader.vue'
 import AppSidebar from './components/AppSidebar.vue'
 import AppFooter from './components/AppFooter.vue'
 import { navigation } from './data/navigation'
+import { useSkinState } from './composables/skin'
 import { closeSearch, openSearch, searchOpen } from './composables/search'
 
 const router = useRouter()
 const route = useRoute()
+useSkinState()
 
 const mobileOpen = ref(false)
 const searchValue = ref('')
@@ -49,7 +51,7 @@ watch(() => route.fullPath, () => {
 
 <template>
   <NeuProvider>
-    <div class="min-h-svh neu-canvas">
+    <div class="min-h-svh surface-canvas">
       <AppHeader @search="openSearch" @toggle-sidebar="mobileOpen = true" />
 
       <div class="mx-auto flex w-full max-w-[110rem] gap-10 px-4 sm:px-6 lg:px-8">
@@ -95,10 +97,10 @@ watch(() => route.fullPath, () => {
         >
           <div
             v-if="searchOpen"
-            class="fixed inset-0 z-[100] flex justify-center px-4 pt-[10vh] pb-4 neu-overlay"
+            class="fixed inset-0 z-[100] flex justify-center px-4 pt-[10vh] pb-4 surface-overlay"
             @click.self="searchOpen = false"
           >
-            <div class="flex max-h-[min(70vh,34rem)] w-full max-w-xl self-start flex-col overflow-hidden rounded-3xl bg-default neu-raised-xl">
+            <div class="flex max-h-[min(70vh,34rem)] w-full max-w-xl self-start flex-col overflow-hidden rounded-3xl bg-default surface-deck">
               <UCommandPalette
                 v-model="searchValue"
                 v-model:search-term="searchTerm"

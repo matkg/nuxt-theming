@@ -1,19 +1,30 @@
 import { readdirSync, writeFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { dirname, join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 const nuxtUiEntry = fileURLToPath(import.meta.resolve('@nuxt/ui'))
-const componentsDir = join(dirname(nuxtUiEntry), 'runtime/components')
+const componentsDir = join(dirname(nuxtUiEntry), 'runtime', 'components')
 
 /**
  * Internal building blocks (not public API) and components that need an
  * optional peer dependency, exported from a dedicated subpath instead.
  */
-const EXCLUDE = new Set(['LinkBase', 'OverlayProvider', 'Theme', 'Chart'])
+const EXCLUDE = new Set(['LinkBase', 'OverlayProvider', 'Theme', 'Chart', 'ContextMenuContent', 'DropdownMenuContent'])
 
-const names = readdirSync(componentsDir)
-  .filter(file => file.endsWith('.vue'))
-  .map(file => file.slice(0, -4))
-  .filter(name => /^[A-Z]/.test(name) && !EXCLUDE.has(name))
+function collect(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = join(dir, entry.name)
+    const rel = relative(componentsDir, full).split(sep).join('/')
+    if (rel.startsWith('prose/') || rel.startsWith('content/')) return []
+    if (entry.isDirectory()) return collect(full)
+    if (!entry.isFile() || !entry.name.endsWith('.vue')) return []
+    const base = entry.name.slice(0, -4)
+    if (EXCLUDE.has(base)) return []
+    return [rel]
+  })
+}
+
+const names = collect(componentsDir)
+  .filter(path => /^[A-Z]/.test(path.split('/').pop() || ''))
   .sort((a, b) => a.localeCompare(b))
 
 const lines = [
@@ -23,12 +34,14 @@ const lines = [
   ''
 ]
 
-for (const name of names) {
-  lines.push(`export { default as Neu${name} } from '@nuxt/ui/components/${name}.vue'`)
+for (const path of names) {
+  const file = path.split('/').pop() || ''
+  const name = file.replace(/\.vue$/, '')
+  lines.push(`export { default as Neu${name} } from '@nuxt/ui/components/${path}'`)
 }
 
 lines.push('')
 
-writeFileSync(new URL('../src/components.ts', import.meta.url), lines.join('\n'))
+writeFileSync(new URL('../src/components.generated.ts', import.meta.url), lines.join('\n'))
 
-console.log(`✔ generated src/components.ts (${names.length} components)`)
+console.log(`✔ generated src/components.generated.ts (${names.length} components)`)

@@ -58,7 +58,7 @@ const treeItems = [
               size="md"
             />
           </div>
-          <div class="flex flex-col items-center justify-center gap-6 rounded-2xl bg-default p-6 neu-inset-sm">
+          <div class="flex flex-col items-center justify-center gap-6 rounded-2xl bg-default p-6 surface-well-sm">
             <UUser
               orientation="vertical"
               name="Ada Lovelace"
@@ -85,7 +85,7 @@ const treeItems = [
             variant="soft"
           />
           <template #content>
-            <div class="mt-4 rounded-2xl bg-default p-5 text-sm text-muted neu-inset-sm">
+            <div class="mt-4 rounded-2xl bg-default p-5 text-sm text-muted surface-well-sm">
               Collapsibles animate their height. The content surface is inset so the trigger stays
               visually raised while the panel opens underneath.
             </div>
@@ -94,7 +94,7 @@ const treeItems = [
       </Demo>
 
       <Demo title="Tree">
-        <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+        <div class="rounded-2xl bg-default p-4 surface-well-sm">
           <UTree :items="treeItems" :get-key="getKey" :default-expanded="['src']" />
         </div>
       </Demo>

@@ -57,7 +57,7 @@ const chips = ['primary', 'success', 'warning', 'error'] as const
 
       <Demo title="Skeleton">
         <div class="grid gap-4 sm:grid-cols-2">
-          <div class="space-y-3 rounded-2xl bg-default p-4 neu-inset-sm">
+          <div class="space-y-3 rounded-2xl bg-default p-4 surface-well-sm">
             <div class="flex items-center gap-3">
               <USkeleton class="size-10 rounded-full" />
               <div class="flex-1 space-y-2">
@@ -67,7 +67,7 @@ const chips = ['primary', 'success', 'warning', 'error'] as const
             </div>
             <USkeleton class="h-20 w-full rounded-2xl" />
           </div>
-          <div class="space-y-3 rounded-2xl bg-default p-4 neu-inset-sm">
+          <div class="space-y-3 rounded-2xl bg-default p-4 surface-well-sm">
             <USkeleton class="h-4 w-2/3" />
             <USkeleton class="h-3 w-full" />
             <USkeleton class="h-3 w-5/6" />
@@ -85,7 +85,7 @@ const chips = ['primary', 'success', 'warning', 'error'] as const
             <UAvatar :alt="color.slice(0, 2).toUpperCase()" size="lg" />
           </UChip>
           <UChip color="primary" inset size="2xl">
-            <div class="grid size-12 place-items-center rounded-xl bg-default neu-raised-sm">
+            <div class="grid size-12 place-items-center rounded-xl bg-default surface-card">
               <UIcon name="i-lucide-bell" class="size-5 text-primary" />
             </div>
           </UChip>

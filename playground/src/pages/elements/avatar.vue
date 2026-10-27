@@ -66,7 +66,7 @@ const colors = ['primary', 'secondary', 'success', 'warning', 'error', 'neutral'
 
       <Demo title="Avatar with user">
         <div class="grid gap-4 sm:grid-cols-2">
-          <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+          <div class="rounded-2xl bg-default p-4 surface-well-sm">
             <UUser
               name="Sébastien Chopin"
               description="Co-founder, Nuxt"
@@ -74,7 +74,7 @@ const colors = ['primary', 'secondary', 'success', 'warning', 'error', 'neutral'
               size="lg"
             />
           </div>
-          <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+          <div class="rounded-2xl bg-default p-4 surface-well-sm">
             <UUser
               name="Evan You"
               description="Creator, Vue.js"

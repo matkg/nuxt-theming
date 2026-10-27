@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
-const componentsFile = fileURLToPath(new URL('../../packages/neu-ui/src/components.ts', import.meta.url))
+const componentsFile = fileURLToPath(new URL('../../packages/neu-ui/src/components.generated.ts', import.meta.url))
 const outputFile = fileURLToPath(new URL('../src/data/catalog.generated.ts', import.meta.url))
 
 const source = readFileSync(componentsFile, 'utf8')
@@ -92,7 +92,13 @@ const categoryOverrides = {
   ProgressGroup: 'Elements',
   ScrollArea: 'Layout',
   Toaster: 'Overlays',
-  Chart: 'Data'
+  Chart: 'Data',
+  ColorModeAvatar: 'Utilities',
+  ColorModeButton: 'Utilities',
+  ColorModeImage: 'Utilities',
+  ColorModeSelect: 'Utilities',
+  ColorModeSwitch: 'Utilities',
+  LocaleSelect: 'Utilities'
 }
 
 const layout = /^(Page|Dashboard|Footer|Header|Main|Container|Sidebar|FooterColumns|ScrollArea)/

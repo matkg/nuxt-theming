@@ -51,7 +51,7 @@ const selectedLabel = computed(() => selected.value || '—')
 
     <div class="space-y-10">
       <Demo title="Inline palette" description="Type to filter, use arrow keys to move, Enter to select.">
-        <div class="mx-auto w-full max-w-xl overflow-hidden rounded-3xl bg-default neu-raised-xl">
+        <div class="mx-auto w-full max-w-xl overflow-hidden rounded-3xl bg-default surface-deck">
           <UCommandPalette
             v-model="selected"
             v-model:search-term="search"
@@ -79,7 +79,7 @@ const selectedLabel = computed(() => selected.value || '—')
       </Demo>
 
       <Demo title="Search only">
-        <div class="max-w-sm overflow-hidden rounded-2xl bg-default neu-raised">
+        <div class="max-w-sm overflow-hidden rounded-2xl bg-default surface-panel">
           <UCommandPalette :groups="groups" :close="false" :autofocus="false" placeholder="Filter components…" />
         </div>
       </Demo>

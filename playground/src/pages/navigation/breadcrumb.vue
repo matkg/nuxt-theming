@@ -40,14 +40,14 @@ const items = [
       </Demo>
 
       <Demo title="In context">
-        <div class="rounded-2xl bg-default p-4 neu-raised-sm">
+        <div class="rounded-2xl bg-default p-4 surface-card">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <UBreadcrumb :items="items" />
             <UPagination v-model:page="page" :total="120" :items-per-page="10" size="sm" />
           </div>
           <USeparator class="my-4" />
           <div class="space-y-2">
-            <div v-for="row in 3" :key="row" class="flex items-center gap-3 rounded-xl bg-default px-3 py-2 neu-inset-sm">
+            <div v-for="row in 3" :key="row" class="flex items-center gap-3 rounded-xl bg-default px-3 py-2 surface-well-sm">
               <USkeleton class="size-7 rounded-full" />
               <div class="flex-1 space-y-1.5">
                 <USkeleton class="h-2.5 w-1/3" />

@@ -37,7 +37,7 @@ const filtered = computed(() =>
           <div
             v-for="name in filtered"
             :key="name"
-            class="flex flex-col items-center gap-2 rounded-2xl bg-default px-2 py-4 text-center neu-inset-sm"
+            class="flex flex-col items-center gap-2 rounded-2xl bg-default px-2 py-4 text-center surface-well-sm"
           >
             <UIcon :name="`i-lucide-${name}`" class="size-6 text-primary" />
             <span class="w-full truncate text-[10px] text-dimmed">{{ name }}</span>
@@ -58,10 +58,10 @@ const filtered = computed(() =>
             <UIcon v-for="color in ['text-primary', 'text-secondary', 'text-success', 'text-info', 'text-warning', 'text-error', 'text-muted']" :key="color" name="i-lucide-hexagon" :class="[color, 'size-8']" />
           </div>
           <div class="flex flex-wrap items-center gap-3">
-            <div class="grid size-12 place-items-center rounded-2xl bg-default neu-raised-sm">
+            <div class="grid size-12 place-items-center rounded-2xl bg-default surface-card">
               <UIcon name="i-lucide-package" class="size-5 text-primary" />
             </div>
-            <div class="grid size-12 place-items-center rounded-2xl bg-default neu-inset">
+            <div class="grid size-12 place-items-center rounded-2xl bg-default surface-well">
               <UIcon name="i-lucide-terminal" class="size-5 text-toned" />
             </div>
             <div class="grid size-12 place-items-center rounded-2xl bg-primary/10">

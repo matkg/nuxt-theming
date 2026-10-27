@@ -1,3 +1,4 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
-@import "@neu-nuxt/ui/theme.css";
+@import "@neu-nuxt/ui/skins/neumorphism.css";
+@import "@neu-nuxt/ui/skins/glass.css";

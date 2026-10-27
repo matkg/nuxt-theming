@@ -92,14 +92,14 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 
       <Demo title="On a surface" description="Buttons float above cards thanks to the shared clay palette.">
         <div class="grid gap-4 sm:grid-cols-2">
-          <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+          <div class="rounded-2xl bg-default p-4 surface-well-sm">
             <p class="text-xs font-semibold uppercase tracking-widest text-dimmed">Inset well</p>
             <div class="mt-3 flex gap-2">
               <UButton size="sm" label="Accept" />
               <UButton size="sm" label="Decline" color="neutral" variant="soft" />
             </div>
           </div>
-          <div class="rounded-2xl bg-default p-4 neu-raised-sm">
+          <div class="rounded-2xl bg-default p-4 surface-card">
             <p class="text-xs font-semibold uppercase tracking-widest text-dimmed">Raised card</p>
             <div class="mt-3 flex gap-2">
               <UButton size="sm" label="Accept" />

@@ -32,7 +32,7 @@ const verticalItems = [
       <Demo title="Pill" description="The default variant — a segmented control carved into the surface.">
         <UTabs v-model="tab" :items="items" class="w-full" />
 
-        <div class="mt-6 rounded-2xl bg-default p-5 neu-inset-sm">
+        <div class="mt-6 rounded-2xl bg-default p-5 surface-well-sm">
           <p v-if="tab === 'overview'" class="text-sm text-muted">
             Overview content. The panel uses an inset surface to contrast with the raised card.
           </p>

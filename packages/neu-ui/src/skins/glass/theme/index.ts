@@ -1,47 +1,25 @@
-import { deepMerge } from '../merge'
-import type { NeuTheme } from './types'
+import type { NeuTheme } from '../../../types/theme'
 
 /**
- * Neumorphic surface utilities (defined in `theme.css`):
- * these are plain CSS classes, so they always win over Tailwind
- * utilities such as `shadow-lg` or `ring` that Nuxt UI applies
- * through variants.
+ * Frosted-glass surface utilities (defined in `glass.css`):
+ * same rule as neumorphism — plain CSS classes win over variant
+ * utilities like `shadow-lg` or `ring`.
  */
-const raisedSm = 'neu-raised-sm'
-const raised = 'neu-raised'
-const raisedLg = 'neu-raised-lg'
-const raisedXl = 'neu-raised-xl'
-const insetSm = 'neu-inset-sm'
-const inset = 'neu-inset'
-const button = 'neu-button'
-const field = 'neu-field'
-const check = 'neu-check'
-const track = 'neu-track'
-const thumb = 'neu-thumb'
+const glassPanel = 'glass-panel'
+const glassCard = 'glass-card'
+const glassField = 'glass-field'
+const glassNav = 'glass-nav'
+const glassWell = 'glass-well'
 
 /**
- * The neumorphic theme, in the exact shape of Nuxt UI's `app.config.ui`.
- *
- * Use it at build time through the Vite plugin:
- *
- * ```ts
- * // vite.config.ts
- * import { neuUI } from '@neu-nuxt/ui/vite'
- * export default defineConfig({ plugins: [vue(), neuUI()] })
- * ```
- *
- * or at runtime with the Vue plugin / `<NeuProvider>`.
+ * The glassmorphic theme, in the exact shape of Nuxt UI's `app.config.ui`.
  */
-export const neuTheme: NeuTheme = {
-  /**
-   * Semantic colors. Override with `neuUI({ ui: { colors: { primary: 'teal' } } })`
-   * (or `app.config` equivalent) to re-skin the whole library.
-   */
+export const glassTheme: NeuTheme = {
   colors: {
-    primary: 'indigo',
+    primary: 'sky',
     secondary: 'violet',
     success: 'emerald',
-    info: 'sky',
+    info: 'cyan',
     warning: 'amber',
     error: 'rose',
     neutral: 'slate'
@@ -53,110 +31,102 @@ export const neuTheme: NeuTheme = {
 
   button: {
     slots: {
-      base: `rounded-lg ${button} font-semibold tracking-tight`
+      base: 'rounded-xl font-semibold tracking-tight'
     },
     variants: {
-      size: {
-        xs: { base: 'rounded-md' },
-        sm: { base: 'rounded-md' }
-      },
       variant: {
-        // Flat variants must not float above the surface.
-        ghost: 'shadow-none!',
-        link: 'shadow-none!'
+        solid: 'shadow-[0_12px_28px_-12px_var(--glass-shadow)]',
+        outline: 'glass-btn',
+        soft: 'glass-btn',
+        subtle: 'glass-btn',
+        ghost: 'glass-clear!',
+        link: 'glass-clear!'
       }
     }
   },
 
   badge: {
     slots: {
-      base: 'rounded-md font-semibold'
+      base: 'rounded-md glass-nav font-semibold'
     },
     variants: {
       variant: {
-        outline: raisedSm,
-        subtle: raisedSm
+        outline: glassCard,
+        subtle: glassCard
       }
     }
   },
 
   kbd: {
     slots: {
-      base: `rounded-md ${raisedSm} px-1.5 font-mono`
+      base: 'rounded-md glass-card px-1.5 font-mono'
     }
   },
 
   avatar: {
     slots: {
-      root: `${raisedSm}`
+      root: glassCard
     }
   },
 
   avatarGroup: {
     slots: {
-      base: 'ring-2 ring-(--neu-bg)'
+      base: 'ring-2 ring-(--glass-surface)'
     }
   },
 
   chip: {
     slots: {
-      base: 'ring-2 ring-(--neu-bg)'
+      base: 'ring-2 ring-(--glass-surface)'
     }
   },
 
   alert: {
     slots: {
-      root: `rounded-2xl ${raised}`
+      root: `rounded-2xl ${glassPanel}`
     }
   },
 
   banner: {
     slots: {
-      root: 'rounded-2xl'
+      root: 'rounded-xl glass-card'
     }
   },
 
   card: {
     slots: {
-      root: `rounded-2xl ${raised}`
-    },
-    variants: {
-      variant: {
-        outline: { root: 'ring-0' },
-        subtle: { root: 'ring-0' }
-      }
+      root: `rounded-2xl ${glassPanel}`
     }
   },
 
   empty: {
     slots: {
-      root: 'rounded-2xl'
+      root: 'rounded-2xl glass-field'
     },
     variants: {
       variant: {
-        outline: { root: `border-0 ${inset} ring-0` },
-        soft: { root: `${inset}` },
-        subtle: { root: `${inset} ring-0` }
+        outline: { root: 'glass-field ring-0' },
+        subtle: { root: 'glass-field ring-0' }
       }
     }
   },
 
   progress: {
     slots: {
-      base: `${insetSm} bg-(--neu-bg)`,
-      indicator: raisedSm
+      base: 'glass-groove',
+      indicator: 'glass-progress'
     }
   },
 
   skeleton: {
     slots: {
-      base: `rounded-xl ${insetSm}`
+      base: 'rounded-xl glass-groove'
     }
   },
 
   separator: {
     slots: {
-      border: 'opacity-70'
+      border: 'opacity-80'
     }
   },
 
@@ -166,102 +136,130 @@ export const neuTheme: NeuTheme = {
 
   input: {
     slots: {
-      base: `rounded-lg ${field}`
+      base: 'rounded-lg glass-field'
     },
     variants: {
       variant: {
-        none: 'shadow-none!'
+        none: 'glass-clear'
       }
     }
   },
 
   textarea: {
     slots: {
-      base: `rounded-xl ${field}`
+      base: 'rounded-xl glass-field'
     },
     variants: {
       variant: {
-        none: 'shadow-none!'
+        none: 'glass-clear'
       }
     }
   },
 
   select: {
     slots: {
-      base: `rounded-lg ${field}`,
-      content: `rounded-xl ${raisedXl} ring-0`,
+      base: 'rounded-lg glass-field',
+      content: 'rounded-xl glass-panel ring-0',
       item: 'rounded-md'
     },
     variants: {
       variant: {
-        none: 'shadow-none!'
+        none: 'glass-clear'
       }
     }
   },
 
   selectMenu: {
     slots: {
-      base: `rounded-lg ${field}`,
-      content: `rounded-xl ${raisedXl} ring-0`,
+      base: 'rounded-lg glass-field',
+      content: 'rounded-xl glass-panel ring-0',
       item: 'rounded-md'
     },
-    variants: { variant: { none: 'shadow-none!' } }
+    variants: {
+      variant: {
+        none: 'glass-clear'
+      }
+    }
   },
 
   inputMenu: {
     slots: {
-      base: `rounded-lg ${field}`,
-      content: `rounded-xl ${raisedXl} ring-0`,
+      base: 'rounded-lg glass-field',
+      content: 'rounded-xl glass-panel ring-0',
       item: 'rounded-md',
-      tagsItem: `rounded-md ${raisedSm}`
+      tagsItem: 'rounded-md glass-card'
     },
-    variants: { variant: { none: 'shadow-none!' } }
+    variants: {
+      variant: {
+        none: 'glass-clear'
+      }
+    }
   },
 
   inputNumber: {
     slots: {
-      base: `rounded-lg ${field}`
+      base: 'rounded-lg glass-field'
     },
-    variants: { variant: { none: 'shadow-none!' } }
+    variants: {
+      variant: {
+        none: 'glass-clear'
+      }
+    }
   },
 
   inputTags: {
     slots: {
-      base: `rounded-lg ${field}`,
-      item: `rounded-md ${raisedSm}`,
+      base: 'rounded-lg glass-field',
+      item: 'rounded-md glass-card',
       input: 'bg-transparent'
     },
-    variants: { variant: { none: 'shadow-none!' } }
+    variants: {
+      variant: {
+        none: 'glass-clear'
+      }
+    }
   },
 
   inputDate: {
     slots: {
-      base: `rounded-lg ${field}`
+      base: 'rounded-lg glass-field'
     },
-    variants: { variant: { none: 'shadow-none!' } }
+    variants: {
+      variant: {
+        none: 'glass-clear'
+      }
+    }
   },
 
   inputTime: {
     slots: {
-      base: `rounded-lg ${field}`
+      base: 'rounded-lg glass-field'
     },
-    variants: { variant: { none: 'shadow-none!' } }
+    variants: {
+      variant: {
+        none: 'glass-clear'
+      }
+    }
   },
 
   pinInput: {
     slots: {
-      base: `rounded-lg ${field} text-center`
+      base: 'rounded-lg glass-field text-center'
     },
-    variants: { variant: { none: 'shadow-none!' } }
+    variants: {
+      variant: {
+        none: 'glass-clear'
+      }
+    }
   },
 
   checkbox: {
     slots: {
-      base: `rounded-sm ${check} ring-0`
+      base: 'rounded-sm glass-field'
     },
     variants: {
       variant: {
-        card: { root: `rounded-xl ${raisedSm} border-0` }
+        card: { root: 'rounded-xl glass-card border-0' }
       }
     }
   },
@@ -269,33 +267,33 @@ export const neuTheme: NeuTheme = {
   checkboxGroup: {
     variants: {
       variant: {
-        card: { item: `rounded-xl ${raisedSm}` }
+        card: { item: 'rounded-xl glass-card' }
       }
     }
   },
 
   radioGroup: {
     slots: {
-      base: `${check} ring-0`
+      base: 'glass-field'
     },
     variants: {
       variant: {
-        card: { item: `rounded-xl ${raisedSm}` }
+        card: { item: 'rounded-xl glass-card' }
       }
     }
   },
 
   switch: {
     slots: {
-      base: `${track} border-0`,
-      thumb
+      base: 'glass-field border-0',
+      thumb: 'glass-thumb'
     }
   },
 
   slider: {
     slots: {
-      track: `${insetSm} bg-(--neu-bg)`,
-      thumb: `${thumb}`
+      track: 'glass-groove',
+      thumb: 'glass-thumb ring-0'
     }
   },
 
@@ -307,15 +305,15 @@ export const neuTheme: NeuTheme = {
 
   fileUpload: {
     slots: {
-      base: `rounded-2xl ${inset} border-0`,
-      file: `rounded-lg ${raisedSm} p-2`
+      base: 'rounded-2xl glass-field border-0',
+      file: 'rounded-lg glass-card p-2'
     }
   },
 
   colorPicker: {
     slots: {
-      picker: `rounded-lg ${insetSm}`,
-      selector: `rounded-lg ${insetSm}`
+      picker: 'rounded-lg glass-groove',
+      selector: 'rounded-lg glass-groove'
     }
   },
 
@@ -331,16 +329,16 @@ export const neuTheme: NeuTheme = {
 
   tabs: {
     slots: {
-      list: `rounded-xl ${inset} bg-(--neu-bg)`,
-      indicator: `rounded-lg ${raisedSm}`,
-      trigger: 'rounded-lg',
+      list: `rounded-xl ${glassWell}`,
+      indicator: 'rounded-md glass-card',
+      trigger: 'rounded-md',
       content: 'rounded-xl'
     },
     variants: {
       variant: {
         link: {
-          list: 'rounded-none shadow-none! bg-transparent',
-          indicator: 'shadow-none! rounded-full'
+          list: 'rounded-none glass-clear bg-transparent',
+          indicator: 'glass-clear rounded-full'
         }
       }
     }
@@ -349,7 +347,7 @@ export const neuTheme: NeuTheme = {
   accordion: {
     slots: {
       root: 'space-y-3',
-      item: `rounded-xl ${raised} border-none border-b-0 overflow-hidden`,
+      item: 'rounded-xl glass-panel border-none border-b-0 overflow-hidden',
       trigger: 'px-5 py-4',
       body: 'px-5 pb-5'
     }
@@ -372,13 +370,13 @@ export const neuTheme: NeuTheme = {
       root: 'gap-2',
       link: 'rounded-lg',
       childLink: 'rounded-md'
-    },
+    }
   },
 
   stepper: {
     slots: {
-      trigger: raisedSm,
-      separator: insetSm
+      trigger: 'glass-card',
+      separator: 'glass-groove'
     }
   },
 
@@ -390,7 +388,7 @@ export const neuTheme: NeuTheme = {
 
   header: {
     slots: {
-      root: 'bg-default/80'
+      root: 'glass-header bg-default/70'
     }
   },
 
@@ -406,8 +404,8 @@ export const neuTheme: NeuTheme = {
 
   modal: {
     slots: {
-      overlay: 'neu-overlay',
-      content: `rounded-2xl ${raisedXl} ring-0`,
+      overlay: 'glass-overlay',
+      content: 'rounded-2xl glass-deck ring-0',
       close: 'rounded-lg'
     },
     variants: {
@@ -420,8 +418,8 @@ export const neuTheme: NeuTheme = {
 
   slideover: {
     slots: {
-      overlay: 'neu-overlay',
-      content: `${raisedXl} sm:ring-0`,
+      overlay: 'glass-overlay',
+      content: 'glass-deck sm:glass-deck-edge ring-0',
       close: 'rounded-lg'
     },
     variants: {
@@ -433,8 +431,8 @@ export const neuTheme: NeuTheme = {
 
   drawer: {
     slots: {
-      overlay: 'neu-overlay',
-      content: `${raisedXl} ring-0`
+      overlay: 'glass-overlay',
+      content: 'glass-deck ring-0'
     },
     variants: {
       direction: {
@@ -451,7 +449,7 @@ export const neuTheme: NeuTheme = {
 
   dropdownMenu: {
     slots: {
-      content: `rounded-xl ${raisedXl} ring-0`,
+      content: 'rounded-xl glass-deck ring-0',
       item: 'rounded-md',
       input: 'border-0'
     }
@@ -459,26 +457,26 @@ export const neuTheme: NeuTheme = {
 
   contextMenu: {
     slots: {
-      content: `rounded-xl ${raisedXl} ring-0`,
+      content: 'rounded-xl glass-deck ring-0',
       item: 'rounded-md'
     }
   },
 
   popover: {
     slots: {
-      content: `rounded-xl ${raisedXl} ring-0`
+      content: 'rounded-xl glass-deck ring-0'
     }
   },
 
   tooltip: {
     slots: {
-      content: `rounded-lg ${raised} ring-0 h-auto px-3 py-1.5`
+      content: 'rounded-lg glass-card ring-0 h-auto px-3 py-1.5'
     }
   },
 
   toast: {
     slots: {
-      root: `rounded-xl ${raisedXl} ring-0`
+      root: 'rounded-xl glass-deck ring-0'
     }
   },
 
@@ -501,27 +499,27 @@ export const neuTheme: NeuTheme = {
 
   table: {
     slots: {
-      root: `rounded-2xl ${raised} overflow-hidden`,
+      root: 'rounded-2xl glass-panel overflow-hidden',
       thead: 'bg-elevated/40'
     }
   },
 
   timeline: {
     slots: {
-      indicator: raisedSm,
-      separator: insetSm
+      indicator: 'glass-card',
+      separator: 'glass-groove'
     }
   },
 
   calendar: {
     slots: {
-      root: `rounded-2xl ${raised} p-3`
+      root: 'rounded-2xl glass-panel p-3'
     }
   },
 
   carousel: {
     slots: {
-      dot: 'shadow-none!'
+      dot: 'glass-clear!'
     }
   },
 
@@ -537,7 +535,7 @@ export const neuTheme: NeuTheme = {
 
   pageCard: {
     slots: {
-      root: `rounded-2xl ${raised}`
+      root: 'rounded-2xl glass-panel'
     }
   },
 
@@ -555,39 +553,34 @@ export const neuTheme: NeuTheme = {
 
   pricingPlan: {
     slots: {
-      root: `rounded-2xl ${raised}`
+      root: 'rounded-2xl glass-panel'
     }
   },
 
   authForm: {
     slots: {
-      root: `rounded-2xl ${raisedXl}`
+      root: 'rounded-2xl glass-deck'
     }
   },
 
   blogPost: {
     slots: {
-      root: `rounded-2xl ${raised}`
+      root: 'rounded-2xl glass-panel'
     }
   },
 
   chatMessage: {
     slots: {
-      content: `rounded-xl ${raisedSm}`
+      content: 'rounded-xl glass-card'
     }
   },
 
   editor: {
     slots: {
-      root: `rounded-xl ${insetSm}`
+      root: 'rounded-xl glass-groove'
     }
   }
 }
 
-/** Merge a partial theme on top of the default neumorphic theme. */
-export function resolveNeuTheme(theme?: NeuTheme): NeuTheme {
-  return theme ? deepMerge(structuredClone(neuTheme), theme) : neuTheme
-}
-
-export { toComponentUi } from './adapt'
-export type { NeuTheme, ComponentThemeOverride, ThemeSlot, NeuUIOptions } from './types'
+export { glassTheme as theme }
+export default glassTheme

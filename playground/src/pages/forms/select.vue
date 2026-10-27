@@ -60,12 +60,12 @@ const users = [
 
       <Demo title="In context">
         <div class="grid gap-4 sm:grid-cols-2">
-          <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+          <div class="rounded-2xl bg-default p-4 surface-well-sm">
             <UFormField label="Framework" description="Used for the project template.">
               <USelect v-model="framework" :items="frameworks" class="w-full" />
             </UFormField>
           </div>
-          <div class="rounded-2xl bg-default p-4 neu-raised-sm">
+          <div class="rounded-2xl bg-default p-4 surface-card">
             <UFormField label="Assignee">
               <USelectMenu v-model="user" :items="users" class="w-full" />
             </UFormField>

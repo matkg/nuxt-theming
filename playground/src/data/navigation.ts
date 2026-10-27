@@ -1,3 +1,5 @@
+import { catalogCount } from './catalog.generated'
+
 export interface NavItem {
   label: string
   to: string
@@ -16,7 +18,7 @@ export const navigation: NavGroup[] = [
     items: [
       { label: 'Introduction', to: '/', icon: 'i-lucide-house' },
       { label: 'Theming', to: '/theming', icon: 'i-lucide-palette' },
-      { label: 'All components', to: '/components', icon: 'i-lucide-layout-grid', badge: '122' }
+      { label: 'All components', to: '/components', icon: 'i-lucide-layout-grid', badge: String(catalogCount) }
     ]
   },
   {

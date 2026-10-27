@@ -19,7 +19,7 @@ withDefaults(defineProps<{
     </header>
 
     <div
-      class="rounded-3xl bg-default neu-raised"
+      class="rounded-3xl bg-default surface-panel"
       :class="padded ? 'p-5 sm:p-6' : ''"
     >
       <slot />

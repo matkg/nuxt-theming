@@ -54,7 +54,7 @@ const selection = ref<Row[]>([])
         <UTable :data="rows" :columns="columns" class="w-full">
           <template #component-cell="{ row }">
             <div class="flex items-center gap-2">
-              <div class="grid size-7 place-items-center rounded-lg bg-default neu-inset-sm">
+              <div class="grid size-7 place-items-center rounded-lg bg-default surface-well-sm">
                 <UIcon name="i-lucide-component" class="size-3.5 text-primary" />
               </div>
               <span class="font-medium text-highlighted">{{ row.original.component }}</span>
@@ -91,11 +91,11 @@ const selection = ref<Row[]>([])
 
       <Demo title="Loading & empty">
         <div class="grid gap-6 lg:grid-cols-2">
-          <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+          <div class="rounded-2xl bg-default p-4 surface-well-sm">
             <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-dimmed">Loading</p>
             <UTable :data="[]" :columns="columns.slice(0, 3)" loading loading-color="primary" class="w-full" />
           </div>
-          <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+          <div class="rounded-2xl bg-default p-4 surface-well-sm">
             <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-dimmed">Empty</p>
             <UTable :data="[]" :columns="columns.slice(0, 3)" class="w-full" />
           </div>

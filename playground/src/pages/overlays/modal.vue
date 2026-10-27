@@ -82,15 +82,15 @@ const name = ref('')
 
       <Demo title="Composition" description="Overlays on top of cards still keep their shadow separation.">
         <div class="grid gap-4 sm:grid-cols-3">
-          <div class="rounded-2xl bg-default p-4 neu-raised-sm">
+          <div class="rounded-2xl bg-default p-4 surface-card">
             <p class="text-sm font-semibold text-highlighted">Modal</p>
             <p class="mt-1 text-xs text-muted">Centered dialog, max-w-lg by default.</p>
           </div>
-          <div class="rounded-2xl bg-default p-4 neu-raised-sm">
+          <div class="rounded-2xl bg-default p-4 surface-card">
             <p class="text-sm font-semibold text-highlighted">Slideover</p>
             <p class="mt-1 text-xs text-muted">Edge panel, great for filters.</p>
           </div>
-          <div class="rounded-2xl bg-default p-4 neu-raised-sm">
+          <div class="rounded-2xl bg-default p-4 surface-card">
             <p class="text-sm font-semibold text-highlighted">Drawer</p>
             <p class="mt-1 text-xs text-muted">Snap points and a grab handle.</p>
           </div>

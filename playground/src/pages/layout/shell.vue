@@ -31,7 +31,7 @@ const rows = [
           <div class="flex h-[28rem]">
             <aside class="hidden w-52 shrink-0 flex-col border-e border-default/60 p-3 sm:flex">
               <div class="flex items-center gap-2 px-2 py-1">
-                <span class="grid size-8 place-items-center rounded-lg bg-default neu-raised-sm">
+                <span class="grid size-8 place-items-center rounded-lg bg-default surface-card">
                   <span class="size-2.5 rounded-full bg-primary" />
                 </span>
                 <span class="text-sm font-semibold text-highlighted">neu/ui</span>
@@ -42,7 +42,7 @@ const rows = [
                   v-for="item in nav"
                   :key="item.label"
                   href="#"
-                  class="neu-nav flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium"
+                  class="surface-nav flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium"
                   :class="item.active ? 'is-active text-highlighted' : 'text-muted'"
                   @click.prevent
                 >
@@ -51,7 +51,7 @@ const rows = [
                 </a>
               </nav>
 
-              <div class="mt-auto rounded-2xl bg-default p-3 neu-inset">
+              <div class="mt-auto rounded-2xl bg-default p-3 surface-well">
                 <div class="flex items-center gap-2">
                   <UAvatar src="https://github.com/nuxt.png" size="xs" />
                   <div class="min-w-0">
@@ -75,10 +75,10 @@ const rows = [
               <main class="flex-1 space-y-4 overflow-auto p-4">
                 <div class="grid gap-3 sm:grid-cols-3">
                   <div v-for="stat in [
-                    { label: 'Components', value: '122', icon: 'i-lucide-shapes' },
+                    { label: 'Components', value: '126', icon: 'i-lucide-shapes' },
                     { label: 'Coverage', value: '94%', icon: 'i-lucide-gauge' },
                     { label: 'Build', value: '2.8s', icon: 'i-lucide-zap' }
-                  ]" :key="stat.label" class="rounded-2xl bg-default p-3 neu-raised-sm">
+                  ]" :key="stat.label" class="rounded-2xl bg-default p-3 surface-card">
                     <div class="flex items-center justify-between">
                       <p class="text-[10px] font-semibold uppercase tracking-widest text-dimmed">{{ stat.label }}</p>
                       <UIcon :name="stat.icon" class="size-4 text-primary" />
@@ -87,7 +87,7 @@ const rows = [
                   </div>
                 </div>
 
-                <div class="rounded-2xl bg-default p-3 neu-inset-sm">
+                <div class="rounded-2xl bg-default p-3 surface-well-sm">
                   <div class="mb-2 flex items-center justify-between">
                     <p class="text-xs font-semibold text-highlighted">Recent components</p>
                     <UBadge label="live" color="success" variant="soft" size="sm" />
@@ -96,9 +96,9 @@ const rows = [
                     <div
                       v-for="row in rows"
                       :key="row.name"
-                      class="flex items-center gap-3 rounded-xl bg-default px-3 py-2 neu-raised-sm"
+                      class="flex items-center gap-3 rounded-xl bg-default px-3 py-2 surface-card"
                     >
-                      <div class="grid size-7 place-items-center rounded-lg bg-default neu-inset-sm">
+                      <div class="grid size-7 place-items-center rounded-lg bg-default surface-well-sm">
                         <UIcon name="i-lucide-component" class="size-3.5 text-primary" />
                       </div>
                       <span class="flex-1 text-xs font-medium text-highlighted">{{ row.name }}</span>
@@ -119,11 +119,11 @@ const rows = [
 
       <Demo title="Anatomy" description="Three surfaces, one light source: chrome, content wells and floating actions.">
         <div class="grid gap-4 sm:grid-cols-3">
-          <div class="rounded-2xl bg-default p-4 neu-raised-sm">
+          <div class="rounded-2xl bg-default p-4 surface-card">
             <p class="text-sm font-semibold text-highlighted">Chrome</p>
             <p class="mt-1 text-xs text-muted">Header and rail use raised surfaces with subdued borders.</p>
           </div>
-          <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+          <div class="rounded-2xl bg-default p-4 surface-well-sm">
             <p class="text-sm font-semibold text-highlighted">Content wells</p>
             <p class="mt-1 text-xs text-muted">Lists and forms sit in inset wells to recede from the chrome.</p>
           </div>
@@ -136,7 +136,7 @@ const rows = [
 
       <Demo title="Nuxt UI layout components" description="Every one of these is themed and available as a Neu* export.">
         <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <div v-for="name in ['Header', 'Main', 'Footer', 'Sidebar', 'Container', 'Page', 'PageHero', 'PageSection', 'PageCard', 'DashboardGroup', 'DashboardSidebar', 'DashboardNavbar', 'DashboardPanel', 'DashboardToolbar']" :key="name" class="flex items-center gap-3 rounded-xl bg-default px-3 py-2 neu-inset-sm">
+          <div v-for="name in ['Header', 'Main', 'Footer', 'Sidebar', 'Container', 'Page', 'PageHero', 'PageSection', 'PageCard', 'DashboardGroup', 'DashboardSidebar', 'DashboardNavbar', 'DashboardPanel', 'DashboardToolbar']" :key="name" class="flex items-center gap-3 rounded-xl bg-default px-3 py-2 surface-well-sm">
             <UIcon name="i-lucide-layout-template" class="size-4 text-primary" />
             <code class="text-xs text-toned">Neu{{ name }}</code>
           </div>

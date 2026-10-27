@@ -1,38 +1,42 @@
 {
   "name": "@neu-nuxt/ui",
-  "version": "0.1.0",
-  "description": "Neumorphic theme + component exports for Nuxt UI (Vue)",
+  "version": "0.2.0",
+  "description": "Skin system + neumorphism and glassmorphism presets for Nuxt UI (Vue)",
   "type": "module",
   "license": "MIT",
   "keywords": [
     "nuxt-ui",
     "vue",
+    "skin",
+    "theme",
     "neumorphism",
-    "soft-ui",
-    "component-library"
+    "glassmorphism",
+    "design-system"
   ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./vite": {
-      "types": "./dist/vite.d.ts",
-      "import": "./dist/vite.js"
+    "./skin": {
+      "types": "./dist/skin.d.ts",
+      "import": "./dist/skin.js"
     },
-    "./theme.css": "./src/theme.css",
-    "./package.json": "./package.json",
+    "./skins/neumorphism.css": "./src/skins/neumorphism/neumorphism.css",
+    "./skins/glass.css": "./src/skins/glass/glass.css",
+    "./theme.css": "./src/skins/neumorphism/neumorphism.css",
     "./chart": {
       "types": "./dist/chart.d.ts",
       "import": "./dist/chart.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
-    "src/theme.css",
-    "src/theme",
-    "README.md",
-    "LICENSE"
+    "src/skins",
+    "src/types",
+    "src/registry.ts",
+    "README.md"
   ],
   "sideEffects": [
     "*.css",

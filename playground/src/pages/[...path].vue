@@ -10,8 +10,8 @@ import PageHeader from '../components/PageHeader.vue'
       badge="404"
     />
 
-    <div class="rounded-3xl bg-default neu-raised p-8 text-center sm:p-12">
-      <div class="mx-auto grid size-16 place-items-center rounded-2xl bg-default neu-inset">
+    <div class="rounded-3xl bg-default surface-panel p-8 text-center sm:p-12">
+      <div class="mx-auto grid size-16 place-items-center rounded-2xl bg-default surface-well">
         <UIcon name="i-lucide-ghost" class="size-7 text-dimmed" />
       </div>
       <p class="mt-4 text-sm text-muted">Try the component catalog instead.</p>

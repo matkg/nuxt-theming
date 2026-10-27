@@ -27,7 +27,7 @@ async function copyInstall() {
         <li v-for="item in group.items" :key="item.to">
           <RouterLink
             :to="item.to"
-            class="neu-nav flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+            class="surface-nav flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
             :class="isActive(item.to) ? 'is-active text-highlighted' : 'text-muted hover:text-default'"
           >
             <UIcon
@@ -49,7 +49,7 @@ async function copyInstall() {
       </ul>
     </div>
 
-    <div class="rounded-2xl neu-inset p-3">
+    <div class="rounded-2xl surface-well p-3">
       <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-dimmed">
         Install
       </p>

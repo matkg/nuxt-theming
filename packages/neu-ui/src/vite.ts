@@ -4,55 +4,90 @@ import type { Plugin } from 'vite'
 import ui from '@nuxt/ui/vite'
 import { NEU_THEME_MARKER } from './constants'
 import { deepMerge } from './merge'
-import { neuTheme } from './theme/index'
-import type { NeuUIOptions } from './theme/types'
+import type { Skin } from './types/skin'
+import type { NeuTheme } from './types/theme'
+import { resolveSkin, skins } from './registry'
 
-/** Absolute path to the component theme sources shipped with this package. */
-const themeDir = resolve(dirname(fileURLToPath(import.meta.url)), '../src/theme').replace(/\\/g, '/')
+/** Absolute path to this package's `src` directory (works from src and dist). */
+const packageSrc = resolve(dirname(fileURLToPath(import.meta.url)), '../src').replaceAll('\\', '/')
 
-/**
- * Nuxt UI generates its CSS on the fly, so Tailwind must also scan this
- * package's theme files (they are inside `node_modules`, which Tailwind
- * ignores by default). `@source` paths inside imported CSS are resolved
- * relative to the entry stylesheet, so the safest option is to inject an
- * absolute path into the app's Tailwind entry.
- */
-function neuSourcePlugin(): Plugin {
-  return {
-    name: 'neu-ui:source',
-    enforce: 'pre',
-    transform(code, id) {
-      if (!id.endsWith('.css')) return
-      if (!code.includes('@import "tailwindcss"') && !code.includes("@import 'tailwindcss'")) return
-
-      return { code: `${code}\n@source "${themeDir}";\n`, map: null }
-    }
-  }
+export interface NeuUIOptions extends Record<string, unknown> {
+  /** Skin preset: a built-in name, a `Skin` object, or a theme to merge. */
+  skin?: string | Skin | NeuTheme
+  /** Theme overrides applied on top of the skin. */
+  ui?: NeuTheme
 }
 
 /**
- * Nuxt UI Vite plugin pre-configured with the neumorphic theme.
- * Everything Nuxt UI accepts (`prefix`, `theme`, `router`, `icon`, …)
- * still works.
+ * Nuxt UI Vite plugin pre-configured with a skin preset.
  *
  * ```ts
  * // vite.config.ts
  * import vue from '@vitejs/plugin-vue'
- * import { neuUI } from '@neu-nuxt/ui/vite'
+ * import { skin } from '@neu-nuxt/ui/vite'
  *
  * export default defineConfig({
- *   plugins: [vue(), neuUI()]
+ *   plugins: [vue(), skin('glass')]
  * })
  * ```
  */
-export function neuUI(options: NeuUIOptions = {}) {
-  const { ui: userUi, ...rest } = options
-  const theme = deepMerge({ ...neuTheme, [NEU_THEME_MARKER]: true }, userUi)
+export function skin(
+  nameOrSkin: string | Skin | ({ skin?: NeuUIOptions['skin'] } & NeuUIOptions) = {}
+): (Plugin | Plugin[])[] {
+  const options: NeuUIOptions = typeof nameOrSkin === 'string'
+    ? { skin: nameOrSkin }
+    : (nameOrSkin && 'skin' in nameOrSkin ? nameOrSkin : { skin: nameOrSkin })
+
+  const { skin: skinOption, ui: userUi, ...rest } = options
+  const preset = resolveSkin(skinOption)
+  const theme = deepMerge({ ...preset.theme, [NEU_THEME_MARKER]: preset.name }, userUi)
 
   const factory = ui as unknown as (options?: Record<string, unknown>) => Plugin | Plugin[]
   const nuxtUiPlugins = factory({ ...rest, ui: theme })
 
-  return [neuSourcePlugin(), ...(Array.isArray(nuxtUiPlugins) ? nuxtUiPlugins : [nuxtUiPlugins])]
+  /**
+   * Tailwind must scan the skin theme sources (they live in `node_modules`,
+   * which Tailwind ignores by default). `@source` paths inside imported CSS are
+   * resolved against the entry stylesheet, so injecting absolute paths into the
+   * app's Tailwind entry is the reliable option. All built-in skins are scanned
+   * so runtime switching works without a restart.
+   */
+  const sourceDirs = Object.keys(skins).map(name => `${packageSrc}/skins/${name}`)
+
+  const sourcePlugin: Plugin = {
+    name: 'neu-ui:source',
+    enforce: 'pre',
+    transform(code, id) {
+      if (!id.endsWith('.css')) return
+      const importsTailwind = code.includes('@import "tailwindcss"') || code.includes("@import 'tailwindcss'")
+      if (!importsTailwind) return
+
+      const sources = sourceDirs.map(dir => `@source "${dir}";`)
+      return {
+        code: [code, ...sources, ''].join('\n'),
+        map: null
+      }
+    }
+  }
+
+  // Build-time: mark the document so the skin's scoped tokens apply.
+  const htmlPlugin: Plugin = {
+    name: 'neu-ui:skin-attr',
+    transformIndexHtml(html) {
+      if (preset.name === 'neumorphism') return html
+      if (/<html[^>]*data-skin=/.test(html)) return html
+      return html.replace(/<html([^>]*)>/, `<html$1 data-skin="${preset.name}">`)
+    }
+  }
+
+  return [sourcePlugin, htmlPlugin, ...(Array.isArray(nuxtUiPlugins) ? nuxtUiPlugins : [nuxtUiPlugins])]
 }
 
-export default neuUI
+/** Backwards-compatible alias for `skin('neumorphism')`. */
+export function neuUI(options: NeuUIOptions = {}) {
+  return skin(options)
+}
+
+export { skins, resolveSkin, resolveSkinTheme, getSkin, listSkins } from './registry'
+export type { Skin }
+export default skin

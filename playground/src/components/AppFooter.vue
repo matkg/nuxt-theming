@@ -6,7 +6,7 @@ const year = new Date().getFullYear()
   <footer class="mt-16 border-t border-default/60">
     <div class="mx-auto flex w-full max-w-[110rem] flex-col gap-4 px-4 py-8 sm:px-6 lg:px-8 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex items-center gap-2.5">
-        <span class="grid size-8 place-items-center rounded-lg bg-default neu-raised-sm">
+        <span class="grid size-8 place-items-center rounded-lg bg-default surface-card">
           <span class="size-2.5 rounded-full bg-primary" />
         </span>
         <p class="text-sm text-muted">

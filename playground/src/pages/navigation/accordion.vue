@@ -56,7 +56,7 @@ const items = [
           <template #package>
             <div class="space-y-2 text-sm text-muted">
               <p>Install the package alongside Nuxt UI:</p>
-              <pre class="rounded-xl bg-default p-3 text-xs text-toned neu-inset"><code>npm i @neu-nuxt/ui</code></pre>
+              <pre class="rounded-xl bg-default p-3 text-xs text-toned surface-well"><code>npm i @neu-nuxt/ui</code></pre>
             </div>
           </template>
           <template #theme>

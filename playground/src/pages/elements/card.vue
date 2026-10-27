@@ -34,7 +34,7 @@ const variants = ['outline', 'soft', 'subtle', 'solid'] as const
         <UCard>
           <template #header>
             <div class="flex items-center gap-3">
-              <div class="grid size-10 place-items-center rounded-xl bg-default neu-inset">
+              <div class="grid size-10 place-items-center rounded-xl bg-default surface-well">
                 <UIcon name="i-lucide-package" class="size-5 text-primary" />
               </div>
               <div class="min-w-0">
@@ -74,7 +74,7 @@ const variants = ['outline', 'soft', 'subtle', 'solid'] as const
             { label: 'Revenue', value: '$12.4k', icon: 'i-lucide-trending-up', color: 'text-success' },
             { label: 'Active users', value: '2,481', icon: 'i-lucide-users', color: 'text-primary' },
             { label: 'Churn', value: '1.2%', icon: 'i-lucide-trending-down', color: 'text-error' }
-          ]" :key="stat.label" class="rounded-2xl bg-default p-4 neu-raised-sm">
+          ]" :key="stat.label" class="rounded-2xl bg-default p-4 surface-card">
             <div class="flex items-center justify-between">
               <p class="text-xs font-semibold uppercase tracking-widest text-dimmed">{{ stat.label }}</p>
               <UIcon :name="stat.icon" class="size-4" :class="stat.color" />

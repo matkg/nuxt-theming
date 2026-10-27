@@ -71,10 +71,8 @@ export const catalog: CatalogGroup[] = [
     items: [
       { name: "CommandPalette", description: "Searchable command list", to: "/navigation/command" },
       { name: "ContextMenu", description: "Right-click menu", to: "/overlays/menus" },
-      { name: "ContextMenuContent", description: "Context menu panel (internal helper)", to: "/overlays/menus" },
       { name: "Drawer", description: "Draggable sheet", to: "/overlays/modal" },
       { name: "DropdownMenu", description: "Action menu", to: "/overlays/menus" },
-      { name: "DropdownMenuContent", description: "Dropdown panel (internal helper)", to: "/overlays/menus" },
       { name: "Modal", description: "Dialog window", to: "/overlays/modal" },
       { name: "Popover", description: "Floating content", to: "/overlays/menus" },
       { name: "Slideover", description: "Edge panel", to: "/overlays/modal" },
@@ -168,6 +166,12 @@ export const catalog: CatalogGroup[] = [
       { name: "App", description: "Nuxt UI App component." },
       { name: "Banner", description: "Nuxt UI Banner component." },
       { name: "Collapsible", description: "Single collapsible panel", to: "/data/user" },
+      { name: "ColorModeAvatar", description: "Nuxt UI ColorModeAvatar component." },
+      { name: "ColorModeButton", description: "Nuxt UI ColorModeButton component." },
+      { name: "ColorModeImage", description: "Nuxt UI ColorModeImage component." },
+      { name: "ColorModeSelect", description: "Nuxt UI ColorModeSelect component." },
+      { name: "ColorModeSwitch", description: "Nuxt UI ColorModeSwitch component." },
+      { name: "LocaleSelect", description: "Nuxt UI LocaleSelect component." },
       { name: "Splitter", description: "Nuxt UI Splitter component." },
       { name: "Textarea", description: "Multi-line input", to: "/forms/input" },
     ]

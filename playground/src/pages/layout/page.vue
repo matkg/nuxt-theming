@@ -57,11 +57,11 @@ import PageHeader from '../../components/PageHeader.vue'
           :links="[{ label: 'Learn more', to: '/theming', trailingIcon: 'i-lucide-arrow-right', variant: 'soft', color: 'neutral' }]"
         >
           <div class="grid gap-4 sm:grid-cols-2">
-            <div class="rounded-2xl bg-default p-4 neu-inset-sm">
+            <div class="rounded-2xl bg-default p-4 surface-well-sm">
               <p class="text-sm font-semibold text-highlighted">Inset surface</p>
               <p class="mt-1 text-xs text-muted">For content that should recede.</p>
             </div>
-            <div class="rounded-2xl bg-default p-4 neu-raised-sm">
+            <div class="rounded-2xl bg-default p-4 surface-card">
               <p class="text-sm font-semibold text-highlighted">Raised surface</p>
               <p class="mt-1 text-xs text-muted">For content that should stand out.</p>
             </div>
@@ -83,7 +83,7 @@ import PageHeader from '../../components/PageHeader.vue'
       </Demo>
 
       <Demo title="Container">
-        <UContainer class="rounded-2xl bg-default py-4 neu-inset-sm">
+        <UContainer class="rounded-2xl bg-default py-4 surface-well-sm">
           <p class="text-center text-sm text-muted">
             <code class="text-primary">UContainer</code> centers content at the configured max width
             (<code>--ui-container</code>).

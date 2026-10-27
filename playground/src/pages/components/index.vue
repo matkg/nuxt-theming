@@ -10,8 +10,8 @@ import { catalog, catalogCount } from '../../data/catalog.generated'
         <UBadge :label="`${catalogCount} re-exported`" color="primary" variant="soft" />
       </div>
       <p class="mt-2 max-w-2xl text-sm text-muted sm:text-base">
-        Every public Nuxt UI component is exported with a <code class="text-primary">Neu</code> prefix and
-        inherits the neumorphic theme. Items with a page have a dedicated showcase; the rest are
+        Every public Nuxt UI component is exported with a <code class="text-primary">Neu</code> prefix and is
+        styled by the active skin. Items with a page have a dedicated showcase; the rest are
         available with the same styling.
       </p>
     </header>
@@ -19,7 +19,7 @@ import { catalog, catalogCount } from '../../data/catalog.generated'
     <div class="space-y-8">
       <section v-for="group in catalog" :key="group.label">
         <div class="mb-3 flex items-center gap-2">
-          <div class="grid size-8 place-items-center rounded-lg bg-default neu-raised-sm">
+          <div class="grid size-8 place-items-center rounded-lg bg-default surface-card">
             <UIcon :name="group.icon" class="size-4 text-primary" />
           </div>
           <h2 class="text-sm font-semibold uppercase tracking-widest text-toned">{{ group.label }}</h2>
@@ -33,7 +33,7 @@ import { catalog, catalogCount } from '../../data/catalog.generated'
             :key="item.name"
             :to="item.to"
             class="group flex items-center gap-3 rounded-2xl bg-default px-4 py-3"
-            :class="item.to ? 'neu-raised-sm transition-transform hover:-translate-y-0.5' : 'neu-inset-sm'"
+            :class="item.to ? 'surface-card transition-transform hover:-translate-y-0.5' : 'surface-well-sm'"
           >
             <div class="min-w-0 flex-1">
               <p class="truncate text-sm font-semibold text-highlighted">
