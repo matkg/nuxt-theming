@@ -47,19 +47,20 @@ export const glassTheme: NeuTheme = {
 
   badge: {
     slots: {
-      base: 'rounded-md glass-nav font-semibold'
+      base: 'rounded-md font-semibold'
     },
     variants: {
       variant: {
-        outline: glassCard,
-        subtle: glassCard
+        outline: 'glass-badge',
+        soft: 'glass-badge',
+        subtle: 'glass-badge'
       }
     }
   },
 
   kbd: {
     slots: {
-      base: 'rounded-md glass-card px-1.5 font-mono'
+      base: 'rounded-md glass-surface px-1.5 font-mono'
     }
   },
 
@@ -83,7 +84,7 @@ export const glassTheme: NeuTheme = {
 
   alert: {
     slots: {
-      root: `rounded-2xl ${glassPanel}`
+      root: 'rounded-2xl glass-surface'
     }
   },
 
@@ -95,19 +96,13 @@ export const glassTheme: NeuTheme = {
 
   card: {
     slots: {
-      root: `rounded-2xl ${glassPanel}`
+      root: 'rounded-2xl glass-surface'
     }
   },
 
   empty: {
     slots: {
-      root: 'rounded-2xl glass-field'
-    },
-    variants: {
-      variant: {
-        outline: { root: 'glass-field ring-0' },
-        subtle: { root: 'glass-field ring-0' }
-      }
+      root: 'rounded-2xl glass-surface'
     }
   },
 
@@ -285,7 +280,7 @@ export const glassTheme: NeuTheme = {
 
   switch: {
     slots: {
-      base: 'glass-field border-0',
+      base: 'glass-track border-0',
       thumb: 'glass-thumb'
     }
   },
@@ -329,15 +324,15 @@ export const glassTheme: NeuTheme = {
 
   tabs: {
     slots: {
-      list: `rounded-xl ${glassWell}`,
-      indicator: 'rounded-md glass-card',
-      trigger: 'rounded-md',
+      list: 'rounded-xl glass-tabs',
+      indicator: 'rounded-md glass-tabs-indicator',
+      trigger: 'rounded-md glass-tabs-trigger',
       content: 'rounded-xl'
     },
     variants: {
       variant: {
         link: {
-          list: 'rounded-none glass-clear bg-transparent',
+          list: 'rounded-none glass-tabs-link',
           indicator: 'glass-clear rounded-full'
         }
       }
@@ -375,7 +370,7 @@ export const glassTheme: NeuTheme = {
 
   stepper: {
     slots: {
-      trigger: 'glass-card',
+      trigger: 'glass-surface',
       separator: 'glass-groove'
     }
   },
@@ -506,14 +501,14 @@ export const glassTheme: NeuTheme = {
 
   timeline: {
     slots: {
-      indicator: 'glass-card',
+      indicator: 'glass-surface',
       separator: 'glass-groove'
     }
   },
 
   calendar: {
     slots: {
-      root: 'rounded-2xl glass-panel p-3'
+      root: 'rounded-2xl glass-surface p-3'
     }
   },
 
@@ -535,7 +530,7 @@ export const glassTheme: NeuTheme = {
 
   pageCard: {
     slots: {
-      root: 'rounded-2xl glass-panel'
+      root: 'rounded-2xl glass-surface'
     }
   },
 
@@ -553,7 +548,7 @@ export const glassTheme: NeuTheme = {
 
   pricingPlan: {
     slots: {
-      root: 'rounded-2xl glass-panel'
+      root: 'rounded-2xl glass-surface'
     }
   },
 

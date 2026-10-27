@@ -15,7 +15,7 @@ import PageHeader from '../../components/PageHeader.vue'
       <Demo title="Page hero" :padded="false">
         <UPageHero
           title="Build softer interfaces"
-          description="A hero block with a headline, description and two calls to action — all inheriting the neumorphic surfaces."
+          description="A hero block with a headline, description and two calls to action — all inheriting the active skin's surfaces."
           :links="[
             { label: 'Get started', to: '/elements/button', icon: 'i-lucide-rocket' },
             { label: 'Theming', to: '/theming', color: 'neutral', variant: 'soft', icon: 'i-lucide-palette' }

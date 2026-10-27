@@ -133,7 +133,7 @@ const usage = [
             v-for="surface in surfaces"
             :key="surface.name"
             class="flex h-24 flex-col items-center justify-center gap-1 rounded-2xl bg-default text-center"
-            :class="surface.class"
+            :class="[surface.class, surface.name === 'surface-nav' ? 'is-active' : '']"
           >
             <code class="px-1 text-[11px] font-semibold text-highlighted">.{{ surface.name }}</code>
             <span class="px-2 text-[10px] leading-tight text-muted">{{ surface.description }}</span>

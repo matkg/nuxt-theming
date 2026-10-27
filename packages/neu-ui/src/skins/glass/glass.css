@@ -17,8 +17,7 @@
 /* ------------------------------------------------------------------ */
 
 /* Scoped so multiple skins can be loaded together and switched at runtime. */
-[data-skin='glass'],
-[data-skin='glass'].light {
+[data-skin='glass']:not(.dark) {
   /* Surface colors are translucent; the page background shines through */
   --glass-surface: color-mix(in oklab, #ffffff 48%, transparent);
   --glass-surface-strong: color-mix(in oklab, #ffffff 65%, transparent);
@@ -31,6 +30,11 @@
   /* Hairline */
   --glass-border: color-mix(in oklab, #ffffff 38%, transparent);
   --glass-border-strong: color-mix(in oklab, #ffffff 62%, transparent);
+
+  /* Controls need a darker edge than panels to stay legible. */
+  --glass-control-border: color-mix(in oklab, #0f172a 18%, transparent);
+  --glass-control-bg: color-mix(in oklab, #ffffff 30%, transparent);
+  --glass-badge-bg: #ffffffd9;
 
   /* Shadow */
   --glass-shadow: color-mix(in oklab, #0f172a 12%, transparent);
@@ -52,9 +56,19 @@
   --ui-border-muted: color-mix(in oklab, #94a3b8 18%, transparent);
   --ui-border-accented: color-mix(in oklab, #94a3b8 32%, transparent);
 
-  --ui-text: color-mix(in oklab, #1e293b 92%, transparent);
-  --ui-text-highlighted: color-mix(in oklab, #0f172a 96%, transparent);
-  --ui-text-muted: color-mix(in oklab, #475569 75%, transparent);
+  --ui-text-dimmed: #64748b;
+  --ui-text-muted: #475569;
+  --ui-text-toned: #334155;
+  --ui-text: #1e293b;
+  --ui-text-highlighted: #0f172a;
+
+  /* Solid buttons/badges use these as fills with white text. */
+  --ui-primary: var(--ui-color-primary-700);
+  --ui-secondary: var(--ui-color-secondary-700);
+  --ui-success: var(--ui-color-success-700);
+  --ui-info: var(--ui-color-info-700);
+  --ui-warning: var(--ui-color-warning-700);
+  --ui-error: var(--ui-color-error-700);
 }
 
 [data-skin='glass'].dark,
@@ -68,6 +82,10 @@
 
   --glass-border: color-mix(in oklab, #94a3b8 18%, transparent);
   --glass-border-strong: color-mix(in oklab, #94a3b8 28%, transparent);
+
+  --glass-control-border: color-mix(in oklab, #cbd5e1 26%, transparent);
+  --glass-control-bg: color-mix(in oklab, #0b0f19 28%, transparent);
+  --glass-badge-bg: #12151fe6;
 
   --glass-shadow: color-mix(in oklab, #020617 65%, transparent);
   --glass-shadow-deep: color-mix(in oklab, #020617 78%, transparent);
@@ -87,9 +105,19 @@
   --ui-border-muted: color-mix(in oklab, #94a3b8 16%, transparent);
   --ui-border-accented: color-mix(in oklab, #94a3b8 30%, transparent);
 
-  --ui-text: color-mix(in oklab, #e2e8f0 92%, transparent);
-  --ui-text-highlighted: color-mix(in oklab, #f8fafc 96%, transparent);
-  --ui-text-muted: color-mix(in oklab, #94a3b8 80%, transparent);
+  --ui-text-dimmed: #94a3b8;
+  --ui-text-muted: #cbd5e1;
+  --ui-text-toned: #e2e8f0;
+  --ui-text: #e2e8f0;
+  --ui-text-highlighted: #ffffff;
+
+  /* Bright fills + dark inverted text in dark mode. */
+  --ui-primary: var(--ui-color-primary-400);
+  --ui-secondary: var(--ui-color-secondary-400);
+  --ui-success: var(--ui-color-success-400);
+  --ui-info: var(--ui-color-info-400);
+  --ui-warning: var(--ui-color-warning-400);
+  --ui-error: var(--ui-color-error-400);
 }
 
 /* ------------------------------------------------------------------ */
@@ -146,6 +174,17 @@
     inset 0 1px 0 0 var(--glass-border-strong);
 }
 
+/* Glass effects without painting a background: use when the component
+   applies its own variant background (solid cards, alerts, kbd, …). */
+.glass-surface {
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 8px 24px var(--glass-shadow),
+    inset 0 1px 0 0 var(--glass-border-strong);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+
 /* Larger elevation for overlays / decks. */
 .glass-deck,
 [data-skin='glass'] .surface-deck {
@@ -166,9 +205,17 @@
   border-block-end-width: 1px;
 }
 
+/* Small, nearly opaque label surface so text stays legible. */
+.glass-badge {
+  background: var(--glass-badge-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 0 var(--glass-border-strong);
+}
+
 /* Small glass surface (kbd, avatar, chips). */
 .glass-card,
-[data-skin='glass'] .surface-card {
+[data-skin='glass'] .surface-card,
+[data-skin='glass'] .surface-deck-sm {
   background: var(--glass-surface);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
@@ -180,8 +227,8 @@
 
 /* Inputs: a hairline with a stronger inner highlight and a subtle well. */
 .glass-field {
-  background: transparent;
-  border: 1px solid var(--glass-border);
+  background: var(--glass-control-bg);
+  border: 1px solid var(--glass-control-border);
   box-shadow:
     inset 0 1px 0 0 color-mix(in oklab, var(--glass-border-strong) 55%, transparent),
     0 1px 2px color-mix(in oklab, var(--glass-shadow) 35%, transparent);
@@ -203,13 +250,27 @@
 [data-skin='glass'] .surface-well-sm,
 [data-skin='glass'] .surface-pressed {
   background: color-mix(in oklab, var(--glass-shadow) 14%, transparent);
-  border: 1px solid color-mix(in oklab, var(--glass-border) 60%, transparent);
+  border: 1px solid var(--glass-control-border);
   box-shadow:
     inset 0 1px 2px var(--glass-shadow),
     inset 0 -1px 0 0 var(--glass-border-strong);
 }
 
 /* Interactive items: buttons, nav links, tags. */
+.glass-track {
+  border: 1px solid var(--glass-control-border);
+  box-shadow: inset 0 1px 2px var(--glass-shadow);
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.glass-track[data-state='unchecked'] {
+  background: color-mix(in oklab, var(--glass-shadow) 14%, transparent);
+}
+
+.glass-track[data-state='checked'] {
+  border-color: color-mix(in oklab, var(--ui-primary) 55%, transparent);
+}
+
 .glass-nav,
 [data-skin='glass'] .surface-nav {
   background: transparent;
@@ -243,7 +304,6 @@
 
 /* Progress indicator. */
 .glass-progress {
-  background: currentColor;
   border-radius: 9999px;
   box-shadow:
     0 1px 2px var(--glass-shadow),
@@ -292,6 +352,24 @@
   -webkit-backdrop-filter: none !important;
 }
 
+/* Solid/inverted surfaces flip the expected text contrast, so re-anchor
+   muted text inside them instead of relying on the page-level tokens. */
+[data-skin='glass']:not(.dark) .bg-inverted .text-dimmed,
+[data-skin='glass']:not(.dark) .bg-inverted .text-muted,
+[data-skin='glass']:not(.dark) .bg-inverted .text-toned,
+[data-skin='glass']:not(.dark) .bg-inverted.text-dimmed,
+[data-skin='glass']:not(.dark) .bg-inverted.text-muted {
+  color: color-mix(in oklab, #f8fafc 78%, transparent);
+}
+
+[data-skin='glass'].dark .bg-inverted .text-dimmed,
+[data-skin='glass'].dark .bg-inverted .text-muted,
+[data-skin='glass'].dark .bg-inverted .text-toned,
+[data-skin='glass'].dark .bg-inverted.text-dimmed,
+[data-skin='glass'].dark .bg-inverted.text-muted {
+  color: color-mix(in oklab, #0f172b 72%, transparent);
+}
+
 /* Decorative aurora background for the page/body. */
 .glass-aurora,
 [data-skin='glass'] .surface-canvas {
@@ -301,6 +379,91 @@
     radial-gradient(48rem 34rem at 88% 82%, color-mix(in oklab, var(--glass-aurora-b) 22%, transparent), transparent 65%),
     radial-gradient(40rem 30rem at 55% 25%, color-mix(in oklab, var(--glass-aurora-c) 15%, transparent), transparent 60%);
   background-attachment: fixed;
+}
+
+/* Tabs: a frosted track with a glossy, glassy active pill. */
+.glass-tabs {
+  background-color: color-mix(in oklab, var(--glass-shadow) 10%, transparent);
+  background-image: linear-gradient(180deg, color-mix(in oklab, #ffffff 20%, transparent), transparent 55%);
+  border: 1px solid var(--glass-control-border);
+  box-shadow:
+    inset 0 1px 2px var(--glass-shadow),
+    inset 0 -1px 0 0 var(--glass-border-strong);
+  backdrop-filter: blur(calc(var(--glass-blur) * 0.6)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.6)) saturate(var(--glass-saturate));
+}
+
+.glass-tabs-indicator {
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, #ffffff 24%, transparent);
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, #ffffff 40%, transparent),
+      color-mix(in oklab, #ffffff 8%, transparent) 46%,
+      transparent 60%
+    ),
+    linear-gradient(
+      112deg,
+      transparent 30%,
+      color-mix(in oklab, #ffffff 18%, transparent) 46%,
+      transparent 62%
+    );
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklab, #ffffff 50%, transparent),
+    inset 0 -1px 0 0 color-mix(in oklab, #000000 16%, transparent),
+    0 10px 22px -10px var(--glass-shadow);
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+}
+
+.glass-tabs-indicator::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    112deg,
+    transparent 24%,
+    color-mix(in oklab, #ffffff 22%, transparent) 45%,
+    transparent 58%
+  );
+  transform: translateX(-130%);
+  animation: glass-tabs-sheen 6s ease-in-out 1s infinite;
+  pointer-events: none;
+}
+
+@keyframes glass-tabs-sheen {
+  0%, 62% { transform: translateX(-130%); opacity: 0; }
+  68% { opacity: 1; }
+  82%, 100% { transform: translateX(130%); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-tabs-indicator::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+.glass-tabs-link {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.glass-tabs-trigger {
+  position: relative;
+  transition: background-color 180ms ease, color 180ms ease, opacity 180ms ease;
+}
+
+.glass-tabs-trigger:hover:not([data-state='active']) {
+  background: var(--glass-surface-soft);
+}
+
+.glass-tabs-trigger[data-state='active'] {
+  text-shadow: 0 1px 1px color-mix(in oklab, #000000 22%, transparent);
 }
 
 /* Interactive glass button (outline / soft / subtle variants). */
