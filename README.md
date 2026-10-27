@@ -1,0 +1,65 @@
+# neu-nuxt
+
+A neumorphic ("soft UI") theme and component library for **Nuxt UI v4** in plain **Vue 3**, plus a full component showcase.
+
+```
+neu-nuxt/
+├─ packages/neu-ui/   # @neu-nuxt/ui — the library
+└─ playground/        # the showcase (Vite + Vue + vue-router)
+```
+
+## The library
+
+`@neu-nuxt/ui` re-exports every public Nuxt UI component with a `Neu` prefix and restyles the whole
+system with soft dual-shadow surfaces, inset form wells and pressed interaction states. It also ships
+a Vite plugin that pre-configures Nuxt UI with the theme.
+
+```ts
+// vite.config.ts
+import vue from '@vitejs/plugin-vue'
+import { neuUI } from '@neu-nuxt/ui/vite'
+
+export default defineConfig({ plugins: [vue(), neuUI()] })
+```
+
+```css
+/* main.css */
+@import "tailwindcss";
+@import "@nuxt/ui";
+@import "@neu-nuxt/ui/theme.css";
+```
+
+See [`packages/neu-ui/README.md`](packages/neu-ui/README.md) for the full API, integration modes and theming guide.
+
+## Showcase
+
+The playground is a documentation-style showcase (sidebar navigation, light/dark mode, command
+palette) covering:
+
+- **Elements** — button, badge, alert, avatar, card, kbd, progress, skeleton, chip, separator, icons
+- **Forms** — input, textarea, select, select menu, input menu, tags, checkbox, radio, switch,
+  slider, number, rating, calendar, date/time, pin, upload, color picker, validation
+- **Navigation** — tabs, accordion, breadcrumb, pagination, navigation menu, stepper, command palette
+- **Overlays** — modal, slideover, drawer, dropdown, context menu, popover, tooltip, toast
+- **Data** — table, timeline, user, tree, collapsible
+- **Layout** — page hero/section/card, empty state, dashboard app shell
+- **Theming** — palette, surface utilities, tokens, integration modes
+- **Catalog** — all 122 exports
+
+## Scripts
+
+```bash
+npm install
+
+npm run dev        # showcase dev server
+npm run build      # build the library, then the showcase
+npm run build:lib  # build @neu-nuxt/ui only
+npm run preview    # preview the built showcase
+```
+
+## Requirements
+
+- Node 20+
+- Vue 3.5+
+- Nuxt UI 4+
+- Tailwind CSS 4+

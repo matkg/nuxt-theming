@@ -1,0 +1,61 @@
+{
+  "name": "@neu-nuxt/ui",
+  "version": "0.1.0",
+  "description": "Neumorphic theme + component exports for Nuxt UI (Vue)",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "nuxt-ui",
+    "vue",
+    "neumorphism",
+    "soft-ui",
+    "component-library"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.js"
+    },
+    "./theme.css": "./src/theme.css",
+    "./package.json": "./package.json",
+    "./chart": {
+      "types": "./dist/chart.d.ts",
+      "import": "./dist/chart.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src/theme.css",
+    "src/theme",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css",
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "node scripts/generate-components.mjs && vite build && vue-tsc --emitDeclarationOnly -p tsconfig.build.json",
+    "dev": "node scripts/generate-components.mjs && vite build --watch",
+    "generate:components": "node scripts/generate-components.mjs"
+  },
+  "peerDependencies": {
+    "@nuxt/ui": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@nuxt/ui": "^4.12.0",
+    "@types/node": "^26.6.5",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vue": "^3.5.24",
+    "vue-tsc": "^3.1.1"
+  }
+}

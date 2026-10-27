@@ -1,0 +1,30 @@
+{
+  "name": "neu-nuxt",
+  "version": "0.1.0",
+  "description": "Neumorphic theme and component library for Nuxt UI (Vue 3) + showcase",
+  "scripts": {
+    "dev": "npm run dev --workspace playground",
+    "build": "npm run build --workspace @neu-nuxt/ui && npm run build --workspace playground",
+    "build:lib": "npm run build --workspace @neu-nuxt/ui",
+    "preview": "npm run preview --workspace playground",
+    "generate:catalog": "node playground/scripts/generate-catalog.mjs"
+  },
+  "keywords": [
+    "nuxt-ui",
+    "vue",
+    "neumorphism",
+    "soft-ui",
+    "design-system",
+    "component-library"
+  ],
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "playground"
+  ],
+  "devDependencies": {},
+  "engines": {
+    "node": ">=20"
+  }
+}

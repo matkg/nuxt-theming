@@ -1,0 +1,296 @@
+/**
+ * @neu-nuxt/ui — Neumorphic (soft UI) theme layer for Nuxt UI (Vue)
+ *
+ * Usage (in your app's main CSS):
+ *
+ *   @import "tailwindcss";
+ *   @import "@nuxt/ui";
+ *   @import "@neu-nuxt/ui/theme.css";
+ *
+ * This file:
+ *  1. overrides Nuxt UI's semantic surface/border tokens with a soft,
+ *     monochrome "clay" palette (light + dark),
+ *  2. ships the neumorphic surface utilities used by the theme
+ *     (`neu-raised`, `neu-inset`, `neu-button`, …).
+ *
+ * The utilities are regular CSS (not `@layer utilities`) on purpose:
+ * they must win over variant classes such as `shadow-lg` or `ring`
+ * that Nuxt UI applies *after* the theme slots.
+ */
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens                                                      */
+/* ------------------------------------------------------------------ */
+
+:root,
+:host,
+.light {
+  /* Soft clay surface */
+  --neu-bg: #e4eaf2;
+  --neu-bg-muted: #dde4ef;
+  --neu-bg-elevated: #edf1f8;
+  --neu-bg-accented: #d5dde9;
+
+  /* Dual shadow light source (top-left) */
+  --neu-shadow-light: #ffffff;
+  --neu-shadow-dark: #aab8cc;
+  --neu-inset-light: color-mix(in oklab, var(--neu-shadow-light) 30%, transparent);
+  --neu-inset-dark: color-mix(in oklab, var(--neu-shadow-dark) 75%, transparent);
+
+  --neu-outline: color-mix(in oklab, #64748b 18%, transparent);
+  --neu-outline-strong: color-mix(in oklab, var(--ui-primary) 45%, transparent);
+
+  /* Nuxt UI semantic tokens */
+  --ui-radius: 0.35rem;
+  --ui-bg: var(--neu-bg);
+  --ui-bg-muted: var(--neu-bg-muted);
+  --ui-bg-elevated: var(--neu-bg-elevated);
+  --ui-bg-accented: var(--neu-bg-accented);
+
+  --ui-border: color-mix(in oklab, #64748b 12%, transparent);
+  --ui-border-muted: color-mix(in oklab, #64748b 9%, transparent);
+  --ui-border-accented: color-mix(in oklab, #64748b 17%, transparent);
+}
+
+.dark {
+  --neu-bg: #2b303a;
+  --neu-bg-muted: #272c35;
+  --neu-bg-elevated: #333a46;
+  --neu-bg-accented: #3c4453;
+
+  --neu-shadow-light: #3e4655;
+  --neu-shadow-dark: #14171c;
+  --neu-inset-light: color-mix(in oklab, var(--neu-shadow-light) 65%, transparent);
+  --neu-inset-dark: color-mix(in oklab, var(--neu-shadow-dark) 90%, transparent);
+
+  --neu-outline: color-mix(in oklab, #94a3b8 16%, transparent);
+  --neu-outline-strong: color-mix(in oklab, var(--ui-primary) 55%, transparent);
+
+  --ui-radius: 0.35rem;
+  --ui-bg: var(--neu-bg);
+  --ui-bg-muted: var(--neu-bg-muted);
+  --ui-bg-elevated: var(--neu-bg-elevated);
+  --ui-bg-accented: var(--neu-bg-accented);
+
+  --ui-border: color-mix(in oklab, #94a3b8 14%, transparent);
+  --ui-border-muted: color-mix(in oklab, #94a3b8 10%, transparent);
+  --ui-border-accented: color-mix(in oklab, #94a3b8 20%, transparent);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  body {
+    background-color: var(--neu-bg);
+    color: var(--ui-text);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--ui-primary) 28%, transparent);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--neu-shadow-dark) 90%, transparent) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 9999px;
+    background-clip: content-box;
+    background-color: color-mix(in oklab, var(--neu-shadow-dark) 90%, transparent);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--neu-shadow-dark) 100%, transparent);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Neumorphic surfaces                                                */
+/* ------------------------------------------------------------------ */
+
+/* Extruded, static (cards, panels, alert boxes…) */
+.neu-raised-sm {
+  box-shadow:
+    3px 3px 7px var(--neu-shadow-dark),
+    -3px -3px 7px var(--neu-shadow-light);
+}
+
+.neu-raised {
+  box-shadow:
+    6px 6px 14px var(--neu-shadow-dark),
+    -6px -6px 14px var(--neu-shadow-light);
+}
+
+.neu-raised-lg {
+  box-shadow:
+    10px 10px 22px var(--neu-shadow-dark),
+    -10px -10px 22px var(--neu-shadow-light);
+}
+
+.neu-raised-xl {
+  box-shadow:
+    16px 16px 36px var(--neu-shadow-dark),
+    -16px -16px 36px var(--neu-shadow-light);
+}
+
+/* Sunken / inset (inputs, tracks, wells…) */
+.neu-inset-sm {
+  box-shadow:
+    inset 3px 3px 8px var(--neu-inset-dark),
+    inset -2px -2px 5px var(--neu-inset-light);
+}
+
+.neu-inset {
+  box-shadow:
+    inset 5px 5px 14px var(--neu-inset-dark),
+    inset -4px -4px 9px var(--neu-inset-light);
+}
+
+.neu-pressed {
+  box-shadow:
+    inset 4px 4px 11px var(--neu-inset-dark),
+    inset -2px -2px 5px var(--neu-inset-light);
+}
+
+/* Soft border instead of a hard ring */
+.neu-border {
+  box-shadow:
+    0 0 0 1px var(--neu-outline),
+    4px 4px 10px var(--neu-shadow-dark),
+    -4px -4px 10px var(--neu-shadow-light);
+}
+
+.neu-flat {
+  box-shadow: none;
+}
+
+/* Interactive: raised → lift on hover → pressed on click */
+.neu-button {
+  box-shadow:
+    3px 3px 7px var(--neu-shadow-dark),
+    -3px -3px 7px var(--neu-shadow-light);
+  transition:
+    box-shadow 200ms ease,
+    background-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.neu-button:hover:not(:disabled):not([aria-disabled='true']) {
+  box-shadow:
+    5px 5px 12px var(--neu-shadow-dark),
+    -5px -5px 12px var(--neu-shadow-light);
+}
+
+.neu-button:active:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: inset 3px 3px 8px var(--neu-shadow-dark), inset -2px -2px 6px var(--neu-shadow-light);
+}
+
+.neu-button:disabled,
+.neu-button[aria-disabled='true'] {
+  box-shadow:
+    1px 1px 3px var(--neu-shadow-dark),
+    -1px -1px 3px var(--neu-shadow-light);
+}
+
+/* Small interactive chip / nav item: flat until hovered, inset when active */
+.neu-nav {
+  box-shadow: none;
+  transition: box-shadow 200ms ease, color 200ms ease, background-color 200ms ease;
+}
+
+.neu-nav:hover:not(.is-active) {
+  box-shadow:
+    2px 2px 5px var(--neu-shadow-dark),
+    -2px -2px 5px var(--neu-shadow-light);
+}
+
+.neu-nav.is-active,
+.neu-nav[data-active='true'] {
+  box-shadow: inset 3px 3px 7px var(--neu-shadow-dark), inset -2px -2px 5px var(--neu-shadow-light);
+}
+
+/* Sticky app header: a soft shadow instead of a hard border */
+.neu-header {
+  box-shadow:
+    0 10px 24px -18px var(--neu-shadow-dark),
+    0 1px 0 0 var(--neu-outline);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Form controls                                                      */
+/* ------------------------------------------------------------------ */
+
+.neu-field {
+  box-shadow:
+    inset 4px 4px 10px var(--neu-inset-dark),
+    inset -3px -3px 6px var(--neu-inset-light);
+  transition: box-shadow 200ms ease, outline-color 200ms ease;
+}
+
+.neu-field:focus,
+.neu-field:focus-within {
+  box-shadow:
+    inset 3px 3px 7px var(--neu-inset-dark),
+    inset -1px -1px 4px var(--neu-inset-light);
+}
+
+/* Checkbox / radio / rating squares */
+.neu-check {
+  box-shadow:
+    inset 2px 2px 5px var(--neu-inset-dark),
+    inset -1px -1px 3px var(--neu-inset-light);
+  transition: box-shadow 200ms ease;
+}
+
+.neu-check[data-state='checked'],
+.neu-check[aria-checked='true'] {
+  box-shadow:
+    2px 2px 5px var(--neu-shadow-dark),
+    -2px -2px 5px var(--neu-shadow-light);
+}
+
+/* Switch track + thumb */
+.neu-track {
+  box-shadow:
+    inset 3px 3px 8px var(--neu-inset-dark),
+    inset -2px -2px 5px var(--neu-inset-light);
+}
+
+.neu-thumb {
+  box-shadow:
+    2px 2px 5px var(--neu-shadow-dark),
+    -2px -2px 5px var(--neu-shadow-light);
+}
+
+/* Overlay scrim */
+.neu-overlay {
+  background-color: color-mix(in oklab, var(--neu-bg) 72%, transparent);
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Optional decorative background for hero sections                   */
+/* ------------------------------------------------------------------ */
+
+.neu-canvas {
+  background-color: var(--neu-bg);
+  background-image:
+    radial-gradient(60rem 40rem at 10% -10%, color-mix(in oklab, var(--neu-shadow-light) 70%, transparent), transparent 60%),
+    radial-gradient(50rem 35rem at 110% 110%, color-mix(in oklab, var(--neu-shadow-dark) 35%, transparent), transparent 60%);
+}
