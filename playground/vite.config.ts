@@ -5,7 +5,13 @@ import { neuUI } from '../packages/neu-ui/src/vite'
 
 const library = (path: string) => fileURLToPath(new URL(`../packages/neu-ui/${path}`, import.meta.url))
 
+// GitHub Pages project sites are served from /<repository>/. Local builds keep `/`.
+const pagesBase = process.env.GITHUB_PAGES === 'true'
+  ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'nuxt-theming'}/`
+  : '/'
+
 export default defineConfig({
+  base: pagesBase,
   plugins: [
     vue(),
     neuUI({

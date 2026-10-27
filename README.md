@@ -9,6 +9,8 @@
 A **skin system for Nuxt UI v4** in plain Vue 3, with **neumorphism**, **glassmorphism** and
 **neo-brutalism** presets and a full component showcase.
 
+**Live showcase:** <https://matkg.github.io/nuxt-theming/>
+
 ```
 neu-nuxt/
 ├─ packages/neu-ui/   # @neu-nuxt/ui — the library
@@ -59,6 +61,12 @@ palette, live skin switcher) covering:
 - **Layout** — page hero/section/card, empty state, dashboard app shell
 - **Theming** — skin switcher, palette, shared surface utilities, tokens, integration modes
 - **Catalog** — all exports
+
+The showcase is deployed to GitHub Pages by
+[`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) on every push to
+`master`. GitHub Pages must be enabled with **Source: GitHub Actions** in the repository settings;
+the workflow builds with `GITHUB_PAGES=true`, which sets the Vite base path to `/<repo>/` and
+ships a `404.html` fallback so deep links work.
 
 ## Scripts
 

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>neu/ui — redirecting…</title>
+    <script>
+      (function () {
+        // GitHub Pages project site base: /<repository>/
+        var base = "/" + (window.location.pathname.split("/")[1] || "") + "/"
+        var route = window.location.pathname.indexOf(base) === 0
+          ? window.location.pathname.slice(base.length - 1)
+          : window.location.pathname
+        var target = base + "?redirect=" + encodeURIComponent(route + window.location.search + window.location.hash)
+        window.location.replace(target)
+      })()
+    </script>
+  </head>
+  <body></body>
+</html>
